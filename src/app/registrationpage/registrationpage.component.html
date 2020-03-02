@@ -1,0 +1,59 @@
+<body>
+<div class="container">
+    <h1>Register Here</h1>
+    
+    <br><br>
+    <div class="row">
+        <div class="input-field col offset-s3 s5 ">
+            <input [(ngModel)]="username" type="text" id="name">
+            <label for = "name">Username</label>
+
+        </div>
+    </div>
+    <div class="row" >
+        <div class="input-field col offset-s3 s5 ">
+            
+            <input [(ngModel)]="regitration_email" id="email_inline" type="email" class="validate">
+            <label for="email_inline">Email</label>
+        </div>
+    </div>
+    
+  
+    <div class="row">
+        
+        <div class="input-field col offset-s3 s5">
+            
+            <input [(ngModel)]="registration_password" id="password" type="password" class="validate">
+            <label for="password">Password</label>
+
+        </div>
+    
+
+    </div>
+    <div class="row">
+        
+        <div class="input-field col offset-s3 s5">
+            
+            <input [(ngModel)]="confirmpassword" id="password" type="password" class="validate">
+            <label for="password">Confirm Password</label>
+
+        </div>
+    
+
+    </div>
+    
+    <div class="row" style="text-align: center">
+        <div class="offset-s3 s4">
+    
+        <a  class="waves-effect waves-dark btn-large btn-block btn green darken-1 ">Register</a>
+    </div>
+    </div>
+
+
+</div>
+
+  
+ 
+
+</body>
+<router-outlet></router-outlet>

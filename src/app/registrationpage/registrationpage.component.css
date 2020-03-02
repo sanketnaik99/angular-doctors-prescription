@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+    font-weight: bold
+}
+h2 {
+    text-align: center;
+    font-weight: bold
+}
+
+.btn-block{
+    width: 55%;
+    border-radius: 50px;
+    
+}
