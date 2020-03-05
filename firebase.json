@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "SSM",
+      "public": "dist/SSM",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

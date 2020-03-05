@@ -1,6 +1,11 @@
+import { environment } from './../environments/environment.prod';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+//Angular Fire Imports
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 
 import { FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,17 +17,15 @@ import { RegistrationpageComponent } from './registrationpage/registrationpage.c
   declarations: [
     AppComponent,
     LoginPageComponent,
-    
     RegistrationpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule
-   
-   
-  
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

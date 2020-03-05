@@ -1,47 +1,63 @@
 <body>
-    <div class="container">
-        <h1>WELCOME</h1>
-        <h2>Sign in to Continue</h2>
-        <br><br>
-        <div class="row" >
-            <div class="input-field col offset-s3 s5 ">
-                
-                <input required [(ngModel)]="email" id="email_inline" type="email" class="validate" #name=ngModel>
-                <label for="email_inline">Email</label>
-                
-            </div>
-        </div>
-        <br>
-      
-        <div class="row">
-            
-            <div class="input-field col offset-s3 s5">
-                
-                <input [(ngModel)]="password"id="password" type="password" class="validate">
-                <label for="password">Password</label>
-
-            </div>
-        
-
-        </div>
-        
-        <div class="row" style="text-align: center">
-            <div class="col s6">
-
-            <a class="waves-effect waves-light btn-large btn-block btn green darken">login</a>
-            </div>
-            <div class="col s6">
-        
-            <a routerLink="/registrationpage" class="waves-effect waves-dark btn-large btn-block btn white darken black-text">Register</a>
-        </div>
-        </div>
-
-
+  <div class="container">
+    <h1>WELCOME</h1>
+    <h2>Sign in to Continue</h2>
+    <br /><br />
+    <div class="row">
+      <div class="input-field col offset-s3 s5 ">
+        <input
+          required
+          [(ngModel)]="email"
+          id="email_inline"
+          type="email"
+          class="validate"
+          #name="ngModel"
+        />
+        <label for="email_inline">Email</label>
+      </div>
     </div>
-  
-  
-      
-     
-    
-  </body>
-  <router-outlet></router-outlet>
+    <br />
+
+    <div class="row">
+      <div class="input-field col offset-s3 s5">
+        <input
+          [(ngModel)]="password"
+          id="password"
+          type="password"
+          class="validate"
+        />
+        <label for="password">Password</label>
+      </div>
+    </div>
+
+    <div class="row" style="text-align: center">
+      <div class="col s6">
+        <a
+          class="waves-effect waves-light btn-large btn-block btn green darken"
+          (click)="signIn(email, password)"
+          >login</a
+        >
+      </div>
+      <div class="col s6">
+        <a
+          routerLink="/registrationpage"
+          class="waves-effect waves-dark btn-large btn-block btn white darken black-text"
+          >Register</a
+        >
+      </div>
+    </div>
+
+    <!--LOGIN RESULT MESSAGES-->
+    <div class="row" style="text-align: center;">
+      <div class="col s6">
+        <div class="card-panel red darken-1" *ngIf="result.result == false">
+          <span class="white-text">{{ this.result.message }}</span>
+        </div>
+        <div class="card-panel green darken-1" *ngIf="result.result == true">
+          <span class="white-text">{{ this.result.message }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<router-outlet></router-outlet>

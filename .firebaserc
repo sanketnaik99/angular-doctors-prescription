@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "doctor-s-prescription": {
+      "hosting": {
+        "SSM": [
+          "doctor-s-prescription"
+        ]
+      }
+    }
+  }
+}

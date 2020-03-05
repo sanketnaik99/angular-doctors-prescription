@@ -27,7 +27,9 @@
               "./node_modules/materialize-css/dist/css/materialize.css",
               "src/styles.css"
             ],
-            "scripts": ["./node_modules/materialize-css/dist/js/materialize.js"]
+            "scripts": [
+              "./node_modules/materialize-css/dist/js/materialize.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,8 +121,13 @@
               "devServerTarget": "SSM:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "SSM"
 }
