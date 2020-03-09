@@ -1,5 +1,8 @@
-import { AuthResult, AuthService } from "./../auth.service";
+import { AppState } from "./../store/models/app-state.model";
+import { AuthService, AuthResult } from "./../services/auth.service";
 import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AuthActions } from "../store/actions";
 
 @Component({
   selector: "app-registrationpage",
@@ -13,14 +16,32 @@ export class RegistrationpageComponent implements OnInit {
   confirmpassword = "";
   result: AuthResult = { result: null, message: null };
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit() {}
 
   async register() {
-    this.result = await this.authService.register(
-      this.registration_email,
-      this.registration_password
+    console.log("Register Called");
+
+    this.store.dispatch(
+      AuthActions.userRegistration({
+        credentials: {
+          email: this.registration_email,
+          password: this.registration_password,
+          userType: "Doctor",
+          username: this.username
+        }
+      })
     );
   }
+
+  // async register() {
+  //   this.result = await this.authService.register(
+  //     this.registration_email,
+  //     this.registration_password
+  //   );
+  // }
 }

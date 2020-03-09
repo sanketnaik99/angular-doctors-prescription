@@ -1,4 +1,4 @@
-import { AuthService, AuthResult } from "./../auth.service";
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -9,13 +9,12 @@ import { Component, OnInit } from "@angular/core";
 export class LoginPageComponent implements OnInit {
   public email = "";
   public password = "";
-  result: AuthResult = { result: null, message: null };
   constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
   async signIn() {
-    this.result = await this.authService.signIn(this.email, this.password);
-    console.log(this.result.message);
+    //this.result = await this.authService.signIn(this.email, this.password);
+    //console.log(this.result.message);
   }
 }
