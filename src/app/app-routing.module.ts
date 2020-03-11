@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { RegistrationpageComponent } from "./registrationpage/registrationpage.component";
 import { CaptureimageComponent } from "./captureimage/captureimage.component";
+import { QrcodeComponent } from "./qrcode/qrcode.component";
 import { from } from "rxjs";
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: "captureimage",
     component: CaptureimageComponent
+  },
+  {
+    path: "qrcode",
+    component: QrcodeComponent
   }
 ];
 
