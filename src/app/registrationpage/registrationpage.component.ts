@@ -16,7 +16,9 @@ export class RegistrationpageComponent implements OnInit {
   registration_password = "";
   username = "";
   confirmpassword = "";
-  loading = false;
+  loading$: boolean;
+  status$: boolean;
+  message$: string;
   user_type = "";
   result: AuthResult = { result: null, message: null };
 
@@ -26,7 +28,15 @@ export class RegistrationpageComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store
+      .select(state => state.auth)
+      .subscribe(data => {
+        this.loading$ = data.loading;
+        this.status$ = data.status;
+        this.message$ = data.message;
+      });
+  }
 
   getusertype(value: any) {
     console.log(value);
@@ -34,7 +44,6 @@ export class RegistrationpageComponent implements OnInit {
   }
 
   async register() {
-    this.loading = true;
     this.store.dispatch(
       AuthActions.REGISTER({
         credentials: {
@@ -45,10 +54,8 @@ export class RegistrationpageComponent implements OnInit {
         }
       })
     );
-    this.loading = false;
-    console.log(this.result);
-    if (this.result.result == true) {
-      this.router.navigate(["/"]);
-    }
+    // if (this.status$ == true) {
+    //   this.router.navigate(["/"]);
+    // }
   }
 }

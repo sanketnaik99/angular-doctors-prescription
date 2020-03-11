@@ -9,24 +9,24 @@
     >
       <button
         class="waves-effect waves-light btn-block-patient-doctor btn"
-        (click)="getusertype('doctor')"
+        (click)="getusertype('Doctor')"
         [ngClass]="{
-          darken: this.user_type == 'doctor',
-          grey: this.user_type == 'patient'
+          darken: this.user_type == 'Doctor',
+          grey: this.user_type == 'Patient'
         }"
       >
-        doctor
+        Doctor
       </button>
 
       <button
         class="waves-effect waves-light btn-block-patient-doctor btn darken"
-        (click)="getusertype('patient')"
+        (click)="getusertype('Patient')"
         [ngClass]="{
-          darken: this.user_type == 'patient',
-          grey: this.user_type == 'doctor'
+          darken: this.user_type == 'Patient',
+          grey: this.user_type == 'Doctor'
         }"
       >
-        patient
+        Patient
       </button>
     </div>
     <div class="row">
@@ -71,7 +71,7 @@
     </div>
 
     <div class="row" style="text-align: center">
-      <div *ngIf="this.loading">
+      <div *ngIf="this.loading$ == true">
         <div class="progress">
           <div class="indeterminate"></div>
         </div>
@@ -80,7 +80,7 @@
         <a
           class="waves-effect waves-dark btn-large btn-block btn green darken-1"
           (click)="register()"
-          *ngIf="!this.loading"
+          *ngIf="this.loading$ == false"
         >
           Register
         </a>
@@ -90,11 +90,11 @@
     <!--LOGIN RESULT MESSAGES-->
     <div class="row" style="text-align: center;">
       <div class="col s6">
-        <div class="card-panel red darken-1" *ngIf="result.result == false">
-          <span class="white-text">{{ this.result.message }}</span>
+        <div class="card-panel red darken-1" *ngIf="this.status$ == false">
+          <span class="white-text">{{ this.message$ }}</span>
         </div>
-        <div class="card-panel green darken-1" *ngIf="result.result == true">
-          <span class="white-text">{{ this.result.message }}</span>
+        <div class="card-panel green darken-1" *ngIf="this.status$ == true">
+          <span class="white-text">{{ this.message$ }}</span>
         </div>
       </div>
     </div>

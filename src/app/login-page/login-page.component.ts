@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AuthService } from "./../services/auth.service";
 import { Component, OnInit } from "@angular/core";
@@ -13,14 +14,24 @@ export class LoginPageComponent implements OnInit {
   public email = "";
   public password = "";
   public user_type = "";
-  loading = false;
+  loading$: boolean;
+  status$: boolean;
+  message$: string;
   value = "";
   constructor(
     private authService: AuthService,
     private store: Store<AppState>
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store
+      .select(state => state.auth)
+      .subscribe(data => {
+        this.loading$ = data.loading;
+        this.status$ = data.status;
+        this.message$ = data.message;
+      });
+  }
 
   getusertype(value: any) {
     console.log(value);
@@ -28,8 +39,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   async signIn() {
-    this.loading = true;
-    this.loading = false;
     this.store.dispatch(
       AuthActions.LOGIN({
         credentiials: {
