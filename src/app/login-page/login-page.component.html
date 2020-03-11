@@ -3,6 +3,33 @@
     <h1>WELCOME</h1>
     <h2>Sign in to Continue</h2>
     <br /><br />
+    <div
+      class="btn-group btn-block-patient-doctor row"
+      style="text-align:center"
+    >
+      <button
+        class="waves-effect waves-light btn-block-patient-doctor btn"
+        (click)="getusertype('doctor')"
+        [ngClass]="{
+          darken: this.user_type == 'doctor',
+          grey: this.user_type == 'patient'
+        }"
+      >
+        doctor
+      </button>
+
+      <button
+        class="waves-effect waves-light btn-block-patient-doctor btn darken"
+        (click)="getusertype('patient')"
+        [ngClass]="{
+          darken: this.user_type == 'patient',
+          grey: this.user_type == 'doctor'
+        }"
+      >
+        patient
+      </button>
+    </div>
+    <br /><br />
     <div class="row">
       <div class="input-field col offset-s3 s5 ">
         <input
@@ -29,10 +56,15 @@
         <label for="password">Password</label>
       </div>
     </div>
-
-    <div class="row" style="text-align: center">
+    <div class="row" *ngIf="this.loading">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+    <div class="row" style="text-align: center " *ngIf="!this.loading">
       <div class="col s6">
         <a
+          routerLink="/captureimage"
           class="waves-effect waves-light btn-large btn-block btn green darken"
           (click)="signIn(email, password)"
           >login</a

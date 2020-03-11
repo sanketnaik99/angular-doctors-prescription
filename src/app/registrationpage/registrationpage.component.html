@@ -3,6 +3,32 @@
     <h1>Register Here</h1>
 
     <br /><br />
+    <div
+      class="btn-group btn-block-patient-doctor row"
+      style="text-align:center"
+    >
+      <button
+        class="waves-effect waves-light btn-block-patient-doctor btn"
+        (click)="getusertype('doctor')"
+        [ngClass]="{
+          darken: this.user_type == 'doctor',
+          grey: this.user_type == 'patient'
+        }"
+      >
+        doctor
+      </button>
+
+      <button
+        class="waves-effect waves-light btn-block-patient-doctor btn darken"
+        (click)="getusertype('patient')"
+        [ngClass]="{
+          darken: this.user_type == 'patient',
+          grey: this.user_type == 'doctor'
+        }"
+      >
+        patient
+      </button>
+    </div>
     <div class="row">
       <div class="input-field col offset-s3 s5 ">
         <input [(ngModel)]="username" type="text" id="name" />
@@ -45,10 +71,16 @@
     </div>
 
     <div class="row" style="text-align: center">
+      <div *ngIf="this.loading">
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </div>
       <div class="offset-s3 s4">
         <a
           class="waves-effect waves-dark btn-large btn-block btn green darken-1"
           (click)="register()"
+          *ngIf="!this.loading"
         >
           Register
         </a>
