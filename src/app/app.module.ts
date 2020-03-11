@@ -1,3 +1,5 @@
+import { AuthEffects } from "./store/effects/auth.effects";
+import { authReducer } from "./store/reducers/auth.reducer";
 import { environment } from "./../environments/environment.prod";
 import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
@@ -15,6 +17,10 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 import { RegistrationpageComponent } from "./registrationpage/registrationpage.component";
 import { CaptureimageComponent } from "./captureimage/captureimage.component";
 import { QrcodeComponent } from "./qrcode/qrcode.component";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
   declarations: [
@@ -24,6 +30,7 @@ import { QrcodeComponent } from "./qrcode/qrcode.component";
     CaptureimageComponent,
     QrcodeComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +38,16 @@ import { QrcodeComponent } from "./qrcode/qrcode.component";
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    QRCodeModule
+    QRCodeModule,
+    AngularFirestoreModule,
+    StoreModule.forRoot({
+      auth: authReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

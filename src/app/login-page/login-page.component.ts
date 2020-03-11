@@ -1,5 +1,8 @@
-import { AuthService, AuthResult } from "./../auth.service";
+import { Store } from "@ngrx/store";
+import { AuthService } from "./../services/auth.service";
 import { Component, OnInit } from "@angular/core";
+import { AppState } from "../store/models/app-state.model";
+import { AuthActions } from "../store/actions";
 
 @Component({
   selector: "app-login-page",
@@ -12,8 +15,10 @@ export class LoginPageComponent implements OnInit {
   public user_type = "";
   loading = false;
   value = "";
-  result: AuthResult = { result: null, message: null };
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit() {}
 
@@ -24,9 +29,15 @@ export class LoginPageComponent implements OnInit {
 
   async signIn() {
     this.loading = true;
-
-    this.result = await this.authService.signIn(this.email, this.password);
-    console.log(this.result.message);
     this.loading = false;
+    this.store.dispatch(
+      AuthActions.LOGIN({
+        credentiials: {
+          email: this.email,
+          password: this.password,
+          userType: this.user_type
+        }
+      })
+    );
   }
 }
