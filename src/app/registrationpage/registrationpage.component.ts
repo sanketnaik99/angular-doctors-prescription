@@ -24,10 +24,8 @@ export class RegistrationpageComponent implements OnInit {
   ngOnInit() {}
 
   async register() {
-    console.log("Register Called");
-
     this.store.dispatch(
-      AuthActions.userRegistration({
+      AuthActions.REGISTER({
         credentials: {
           email: this.registration_email,
           password: this.registration_password,
@@ -37,11 +35,4 @@ export class RegistrationpageComponent implements OnInit {
       })
     );
   }
-
-  // async register() {
-  //   this.result = await this.authService.register(
-  //     this.registration_email,
-  //     this.registration_password
-  //   );
-  // }
 }

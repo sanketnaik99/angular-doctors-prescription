@@ -1,3 +1,4 @@
+import { AuthEffects } from "./store/effects/auth.effects";
 import { authReducer } from "./store/reducers/auth.reducer";
 import { environment } from "./../environments/environment.prod";
 import { RouterModule } from "@angular/router";
@@ -16,6 +17,7 @@ import { RegistrationpageComponent } from "./registrationpage/registrationpage.c
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, RegistrationpageComponent],
@@ -33,7 +35,8 @@ import { StoreModule } from "@ngrx/store";
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

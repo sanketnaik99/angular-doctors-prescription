@@ -1,12 +1,9 @@
 import { AngularFirestore } from "@angular/fire/firestore";
-import {
-  UserDetails,
-  RegistrationResult,
-  UserAuthCredentials
-} from "./../store/models/auth.model";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import "firebase/firestore";
+import { Observable, of, throwError } from "rxjs";
+import { map, catchError } from "rxjs/operators";
 
 export interface AuthResult {
   result: boolean;
@@ -21,37 +18,11 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth, private afs: AngularFirestore) {}
 
-  async registerUser(
-    credentials: UserAuthCredentials
-  ): Promise<RegistrationResult> {
-    console.log("Register Function Called");
-
-    return new Promise(resolve => {
-      this.auth
-        .createUserWithEmailAndPassword(credentials.email, credentials.password)
-        .then(res => {
-          console.log(res);
-          this.user = res.user;
-          if (this.user.uid != null) {
-            this.sendVerificationMail();
-            resolve({
-              result: true,
-              message: "Registration Success! Please check your Email.",
-              user: {
-                email: credentials.email,
-                userType: credentials.userType,
-                username: credentials.username
-              }
-            });
-          }
-        })
-        .catch(err => {
-          resolve({
-            message: err.message,
-            result: false
-          });
-        });
-    });
+  register(credentials) {
+    return this.auth.createUserWithEmailAndPassword(
+      credentials.email,
+      credentials.password
+    );
   }
 
   // signIn(email, password): Promise<UserDetails> {
@@ -85,37 +56,11 @@ export class AuthService {
   //   });
   // }
 
-  // register(email, password): Promise<AuthResult> {
-  //   return new Promise(resolve => {
-  //     //REGISTER USER
-  //     this.auth
-  //       .createUserWithEmailAndPassword(email, password)
-  //       .then(res => {
-  //         this.user = res.user;
-  //         if (this.user.uid != null) {
-  //           this.sendVerificationMail();
-  //           resolve({
-  //             result: true,
-  //             message: "Registration Successful! Please check your email."
-  //           });
-  //         } else {
-  //           resolve({ result: false, message: "Registration Error" });
-  //         }
-  //       })
-  //       .catch(err => {
-  //         console.log(err.message);
-  //         resolve({ result: false, message: err.message });
-  //       });
-  //   });`
-  // }
-
   isEmailVerified() {
     return this.user.emailVerified;
   }
 
-  sendVerificationMail() {
-    this.auth.user.subscribe(currentUser => {
-      currentUser.sendEmailVerification();
-    });
+  getUser() {
+    return this.auth.user;
   }
 }

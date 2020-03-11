@@ -1,19 +1,14 @@
-export interface UserDetails {
-    username: string;
-    email: string;
-    userType: string;
+export interface UserCredentials {
+  email: string;
+  password: string;
+  username?: string;
+  userType?: string;
+  uid?: string;
 }
 
-export interface RegistrationResult {
-    result: boolean;
-    message: string;
-    user?: UserDetails
-}
-
-
-export interface UserAuthCredentials {
-    email: string;
-    password: string;
-    username?: string;
-    userType: string;
+export interface UserData {
+  email: string;
+  userType: string;
+  username: string;
+  uid: string;
 }
