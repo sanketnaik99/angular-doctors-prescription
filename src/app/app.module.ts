@@ -19,6 +19,7 @@ import { CaptureimageComponent } from "./captureimage/captureimage.component";
 import { QrcodeComponent } from "./qrcode/qrcode.component";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
@@ -38,6 +39,7 @@ import { EffectsModule } from "@ngrx/effects";
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireStorageModule,
     QRCodeModule,
     AngularFirestoreModule,
     StoreModule.forRoot({

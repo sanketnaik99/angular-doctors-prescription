@@ -63,17 +63,16 @@
     </div>
     <div class="row" style="text-align: center " *ngIf="this.loading$ == false">
       <div class="col s6">
-        <!-- <a
+        <a
           routerLink="/captureimage"
+          class="waves-effect waves-light btn-large btn-block btn green darken"
+          >login</a
+        >
+        <!-- <a
           class="waves-effect waves-light btn-large btn-block btn green darken"
           (click)="signIn(email, password)"
           >login</a
         > -->
-        <a
-          class="waves-effect waves-light btn-large btn-block btn green darken"
-          (click)="signIn(email, password)"
-          >login</a
-        >
       </div>
       <div class="col s6">
         <a

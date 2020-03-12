@@ -6,6 +6,8 @@ import {
   Renderer2
 } from "@angular/core";
 import { Observable } from "rxjs";
+import { AngularFireStorage } from "@angular/fire/storage";
+import "firebase/storage";
 
 @Component({
   selector: "app-captureimage",
@@ -26,8 +28,25 @@ export class CaptureimageComponent implements OnInit {
       height: { ideal: 2160 }
     }
   };
-  constructor(private renderer: Renderer2) {
+  constructor(
+    private renderer: Renderer2,
+    private storage: AngularFireStorage
+  ) {
     this.capture_image = [];
+  }
+
+  upload(image) {
+    console.log(image[0]);
+    let timestamp = Date.now().toString();
+    let ref = this.storage.ref(`captures/${timestamp}`);
+    ref
+      .put(image[0])
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error("ERROR : ", err);
+      });
   }
 
   ngOnInit() {
