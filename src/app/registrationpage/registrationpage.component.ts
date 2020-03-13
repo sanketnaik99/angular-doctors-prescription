@@ -49,7 +49,7 @@ export class RegistrationpageComponent implements OnInit {
         credentials: {
           email: this.registration_email,
           password: this.registration_password,
-          userType: "Doctor",
+          userType: this.user_type,
           username: this.username
         }
       })

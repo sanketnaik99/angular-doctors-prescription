@@ -37,11 +37,11 @@ export class CaptureimageComponent implements OnInit {
   }
 
   upload(image) {
-    console.log(image[0]);
+    console.log(image);
     let timestamp = Date.now().toString();
     let ref = this.storage.ref(`captures/${timestamp}`);
     ref
-      .put(image[0])
+      .put(image)
       .then(res => {
         console.log(res);
       })
@@ -97,12 +97,12 @@ export class CaptureimageComponent implements OnInit {
     const imageBlob = this.dataURItoBlob(this.base64);
     console.log(imageBlob);
     this.capture_image.push(imageBlob);
-
-    this.upload(this.capture_image[0]);
+    const image_file = new File([imageBlob], "image", { type: "image/jpeg" });
+    this.upload(image_file);
   }
 
   dataURItoBlob(dataURI) {
-    dataURI = dataURI.slice(15);
+    dataURI = dataURI.slice(22);
     console.log(dataURI);
 
     const byteString = window.atob(dataURI);

@@ -1,5 +1,6 @@
+import { Action } from "rxjs/internal/scheduler/Action";
 import { UserCredentials, UserData } from "./../models/auth.model";
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, on, State } from "@ngrx/store";
 import { AuthActions } from "../actions";
 
 export interface AuthState {
@@ -96,3 +97,7 @@ export const authReducer = createReducer(
     loading: false
   }))
 );
+
+export function auth_reducer(state, action) {
+  return authReducer(state, action);
+}

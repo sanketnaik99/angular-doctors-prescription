@@ -1,5 +1,5 @@
 import { AuthEffects } from "./store/effects/auth.effects";
-import { authReducer } from "./store/reducers/auth.reducer";
+import { authReducer, auth_reducer } from "./store/reducers/auth.reducer";
 import { environment } from "./../environments/environment.prod";
 import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
@@ -19,8 +19,8 @@ import { CaptureimageComponent } from "./captureimage/captureimage.component";
 import { QrcodeComponent } from "./qrcode/qrcode.component";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { AngularFireStorageModule } from "@angular/fire/storage";
 import { StoreModule } from "@ngrx/store";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
@@ -43,8 +43,9 @@ import { EffectsModule } from "@ngrx/effects";
     QRCodeModule,
     AngularFirestoreModule,
     StoreModule.forRoot({
-      auth: authReducer
+      auth: auth_reducer
     }),
+    AngularFireStorageModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production

@@ -18,6 +18,7 @@ import { AuthActions } from "../actions";
 import { of, from } from "rxjs";
 import { AppState, selectAuthState } from "../models/app-state.model";
 import { Action } from "rxjs/internal/scheduler/Action";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +27,8 @@ export class AuthEffects {
     private actions$: Actions,
     private store: Store<AppState>,
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private router: Router
   ) {}
 
   register$ = createEffect(() =>
@@ -103,7 +105,10 @@ export class AuthEffects {
           })
         );
       }),
-      map(() => AuthActions.DB_UPDATE_SUCCESS()),
+      map(() => {
+        this.router.navigate(["/"]);
+        return AuthActions.DB_UPDATE_SUCCESS();
+      }),
       catchError(err => of(AuthActions.DB_UPDATE_FAIL({ error: err.message })))
     )
   );
