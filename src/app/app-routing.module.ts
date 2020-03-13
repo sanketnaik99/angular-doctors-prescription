@@ -4,6 +4,7 @@ import { LoginPageComponent } from "./login-page/login-page.component";
 import { RegistrationpageComponent } from "./registrationpage/registrationpage.component";
 import { CaptureimageComponent } from "./captureimage/captureimage.component";
 import { QrcodeComponent } from "./qrcode/qrcode.component";
+import { DoctorscanningComponent } from "./doctorscanning/doctorscanning.component";
 import { from } from "rxjs";
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: "qrcode",
     component: QrcodeComponent
+  },
+  {
+    path: "doctorscanning",
+    component: DoctorscanningComponent
   }
 ];
 

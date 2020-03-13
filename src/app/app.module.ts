@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { QRCodeModule } from "angularx-qrcode";
+import { NgQrScannerModule } from "angular2-qrscanner";
 
 //Angular Fire Imports
 import { AngularFireModule } from "@angular/fire";
@@ -22,6 +23,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { StoreModule } from "@ngrx/store";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { EffectsModule } from "@ngrx/effects";
+import { DoctorscanningComponent } from "./doctorscanning/doctorscanning.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { EffectsModule } from "@ngrx/effects";
     LoginPageComponent,
     RegistrationpageComponent,
     CaptureimageComponent,
-    QrcodeComponent
+    QrcodeComponent,
+    DoctorscanningComponent
   ],
 
   imports: [
@@ -37,6 +40,7 @@ import { EffectsModule } from "@ngrx/effects";
     AppRoutingModule,
     RouterModule,
     FormsModule,
+    NgQrScannerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
