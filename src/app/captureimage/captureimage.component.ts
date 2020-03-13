@@ -20,6 +20,7 @@ export class CaptureimageComponent implements OnInit {
   videoWidth = 0;
   videoHeight = 0;
   capture_image = [];
+  base64 = "";
 
   constraints = {
     video: {
@@ -58,6 +59,7 @@ export class CaptureimageComponent implements OnInit {
       "srcObject",
       stream
     );
+
     this.renderer.listen(this.videoElement.nativeElement, "play", event => {
       this.videoHeight = this.videoElement.nativeElement.videoHeight;
       this.videoWidth = this.videoElement.nativeElement.videoWidth;
@@ -90,6 +92,26 @@ export class CaptureimageComponent implements OnInit {
     this.canvas.nativeElement
       .getContext("2d")
       .drawImage(this.videoElement.nativeElement, 0, 0);
-    this.capture_image.push(this.canvas.nativeElement.toDataURL("image/png"));
+    this.base64 = this.canvas.nativeElement.toDataURL("image/png");
+    //this.capture_image.push(this.canvas.nativeElement.toDataURL("image/png"));
+    const imageBlob = this.dataURItoBlob(this.base64);
+    console.log(imageBlob);
+    this.capture_image.push(imageBlob);
+
+    this.upload(this.capture_image[0]);
+  }
+
+  dataURItoBlob(dataURI) {
+    dataURI = dataURI.slice(15);
+    console.log(dataURI);
+
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: "image/jpeg" });
+    return blob;
   }
 }
