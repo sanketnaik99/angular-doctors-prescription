@@ -8,6 +8,7 @@ import { AdminLoginComponent } from "./admin-login/admin-login.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { CanActivate } from "@angular/router";
 import { AdminAuthGuard } from "./admin.guard";
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminLoginComponent, AdminDashboardComponent],
+  declarations: [AdminLoginComponent, AdminDashboardComponent, AdminNavbarComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
