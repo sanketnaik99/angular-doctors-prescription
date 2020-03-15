@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: "doctorscanning",
     component: DoctorscanningComponent
+  },
+  {
+    path: "admin",
+    loadChildren: "./admin/admin.module#AdminModule"
   }
 ];
 
