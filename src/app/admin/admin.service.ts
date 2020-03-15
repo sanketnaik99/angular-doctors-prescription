@@ -12,7 +12,7 @@ import { EmptyError } from "rxjs";
 export class AdminService {
   userData: UserData;
   loggedInUser;
-  isAdmin: boolean = true;
+  isAdmin: boolean;
 
   constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {}
 
