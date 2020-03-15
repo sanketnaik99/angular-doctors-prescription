@@ -24,7 +24,7 @@ export class AdminService {
           if (res.user.uid != null) {
             this.loggedInUser = res.user;
             console.log(this.loggedInUser);
-            this.getDbData(this.loggedInUser.uid)
+            this.getUserData(this.loggedInUser.uid)
               .then(data => {
                 this.userData = data;
                 this.isAdmin = true;
@@ -52,7 +52,7 @@ export class AdminService {
     });
   }
 
-  getDbData(uid: string): Promise<UserData> {
+  getUserData(uid: string): Promise<UserData> {
     return new Promise(async (resolve, reject) => {
       const data = this.afs
         .collection("Admins")
@@ -72,6 +72,28 @@ export class AdminService {
           admin: user["admin"]
         });
       });
+    });
+  }
+
+  getDoctorData(): Promise<any[]> {
+    return new Promise(resolve => {
+      this.afs
+        .collection("Doctor")
+        .valueChanges()
+        .subscribe(res => {
+          resolve(res);
+        });
+    });
+  }
+
+  getPatientData(): Promise<any[]> {
+    return new Promise(resolve => {
+      this.afs
+        .collection("Patient")
+        .valueChanges()
+        .subscribe(res => {
+          resolve(res);
+        });
     });
   }
 }

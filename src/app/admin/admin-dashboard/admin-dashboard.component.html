@@ -1,2 +1,72 @@
 <app-admin-navbar></app-admin-navbar>
-<h1>Dashboard Works</h1>
+<div class="row">
+  <!-- Doctors -->
+  <div class="col s12 m6">
+    <div class="row">
+      <!-- Title -->
+      <div class="col s12 center-align">
+        <h3>Doctors</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12" *ngIf="this.isDoctorLoading">
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </div>
+      <ul class="collection user-card" *ngIf="!this.isDoctorLoading">
+        <li
+          class="collection-item avatar light-green lighten-3 doctor-patient-item"
+          *ngFor="let doctor of doctors"
+        >
+          <img src="assets/doctor.png" alt="" class="circle" />
+          <span class="title username">{{ doctor.username }}</span>
+          <p>
+            EMAIL: {{ doctor.email }}<br />
+            UID: {{ doctor.uid }}
+          </p>
+          <a
+            (click)="makeAdmin(doctor.uid, doctor.username)"
+            class="secondary-content"
+            ><i class="gear material-icons black-text">security</i></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--  -->
+  <!-- Patients -->
+  <!--  -->
+  <div class="col s12 m6">
+    <div class="row">
+      <div class="col s12 center align">
+        <h3>Patients</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12" *ngIf="this.isPatientLoading">
+        <div class="progress">
+          <div class="indeterminate"></div>
+        </div>
+      </div>
+      <ul class="collection user-card" *ngIf="!this.isPatientLoading">
+        <li
+          class="collection-item avatar light-blue lighten-4 doctor-patient-item"
+          *ngFor="let patient of patients"
+        >
+          <img src="assets/patient.png" alt="" class="circle" />
+          <span class="title username">{{ patient.username }}</span>
+          <p>
+            EMAIL: {{ patient.email }}<br />
+            UID: {{ patient.uid }}
+          </p>
+          <a
+            (click)="makeAdmin(patient.uid, patient.username)"
+            class="secondary-content"
+            ><i class="gear material-icons black-text">security</i></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
