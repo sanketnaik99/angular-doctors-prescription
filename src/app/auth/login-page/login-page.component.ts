@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AuthService } from "./../services/auth.service";
+import { AuthService } from "../../services/auth.service";
 import { Component, OnInit } from "@angular/core";
-import { AppState } from "../store/models/app-state.model";
-import { AuthActions } from "../store/actions";
+import { AppState } from "../../store/models/app-state.model";
+import { AuthActions } from "../../store/actions";
 
 @Component({
   selector: "app-login-page",

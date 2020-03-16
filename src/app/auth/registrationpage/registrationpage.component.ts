@@ -1,10 +1,10 @@
-import { AppState } from "./../store/models/app-state.model";
-import { AuthService, AuthResult } from "./../services/auth.service";
+import { AppState } from "../../store/models/app-state.model";
+import { AuthService, AuthResult } from "../../services/auth.service";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { from } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AuthActions } from "../store/actions";
+import { AuthActions } from "../../store/actions";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
