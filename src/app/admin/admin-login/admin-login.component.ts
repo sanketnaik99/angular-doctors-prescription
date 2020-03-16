@@ -56,9 +56,7 @@ export class AdminLoginComponent implements OnInit {
         this.loading = false;
       } else {
         this.hasError = false;
-        setTimeout(() => {
-          this.router.navigate(["admin/dashboard"]);
-        }, 2000);
+        this.router.navigate(["/admin/dashboard"]);
       }
     }
   }

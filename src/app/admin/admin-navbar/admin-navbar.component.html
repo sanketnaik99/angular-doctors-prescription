@@ -1,16 +1,30 @@
 <nav>
   <div class="nav-wrapper green accent-4">
-    <a href="#" class="brand-logo">ADMIN</a>
+    <a routerLink="/admin/dashboard" class="brand-logo"
+      ><img src="assets/admin-logo.png" alt="Admin" height="60"
+    /></a>
     <a data-target="mobile-demo" class="sidenav-trigger"
       ><i class="material-icons">menu</i></a
     >
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="sass.html">DASHBOARD</a></li>
-      <li><a href="badges.html">ADD MEDICINE</a></li>
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active">DASHBOARD</a>
+      </li>
+      <li>
+        <a routerLink="/admin/add-medicine" routerLinkActive="active"
+          >ADD MEDICINE</a
+        >
+      </li>
     </ul>
   </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-  <li><a href="sass.html">DASHBOARD</a></li>
-  <li><a href="badges.html">ADD MEDICINE</a></li>
+  <li>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">DASHBOARD</a>
+  </li>
+  <li>
+    <a routerLink="/admin/add-medicine" routerLinkActive="active"
+      >ADD MEDICINE</a
+    >
+  </li>
 </ul>
