@@ -1,0 +1,13 @@
+.qrcode-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 200px 0;
+}
+
+.navbarfontsize {
+  font-size: 20px;
+}
+
+/* width: 128px;
+height: 128px; */

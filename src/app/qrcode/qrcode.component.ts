@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
+import * as M from "materialize-css";
 
 @Component({
   selector: "app-qrcode",
   templateUrl: "./qrcode.component.html",
   styleUrls: ["./qrcode.component.css"]
 })
-export class QrcodeComponent implements OnInit {
+export class QrcodeComponent implements OnInit, AfterViewInit {
   patient_uid = "";
 
   constructor() {
@@ -13,4 +14,10 @@ export class QrcodeComponent implements OnInit {
   }
 
   ngOnInit() {}
+  ngAfterViewInit(): void {
+    setTimeout(function() {
+      var elem = document.querySelector(".sidenav");
+      var instance = M.Sidenav.init(elem);
+    }, 0);
+  }
 }

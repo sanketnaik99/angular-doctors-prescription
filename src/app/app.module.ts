@@ -24,6 +24,8 @@ import { StoreModule } from "@ngrx/store";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { EffectsModule } from "@ngrx/effects";
 import { DoctorscanningComponent } from "./doctorscanning/doctorscanning.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { from } from "rxjs";
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { DoctorscanningComponent } from "./doctorscanning/doctorscanning.compone
     AngularFireStorageModule,
     QRCodeModule,
     AngularFirestoreModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({
       auth: auth_reducer
     }),

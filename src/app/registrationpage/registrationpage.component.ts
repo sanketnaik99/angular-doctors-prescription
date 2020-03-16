@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { from } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AuthActions } from "../store/actions";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-registrationpage",
@@ -12,6 +13,7 @@ import { AuthActions } from "../store/actions";
   styleUrls: ["./registrationpage.component.css"]
 })
 export class RegistrationpageComponent implements OnInit {
+  loginForm: FormGroup;
   registration_email = "";
   registration_password = "";
   username = "";
@@ -25,7 +27,8 @@ export class RegistrationpageComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    public formbuilder: FormBuilder
   ) {}
 
   ngOnInit() {
