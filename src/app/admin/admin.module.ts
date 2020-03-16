@@ -1,3 +1,4 @@
+import { AdminComponent } from "./admin/admin.component";
 import { AdminService } from "./admin.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
@@ -13,16 +14,28 @@ import { AdminNavbarComponent } from "./admin-navbar/admin-navbar.component";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "login"
-  },
-  {
-    path: "login",
-    component: AdminLoginComponent
-  },
-  {
-    path: "dashboard",
-    component: AdminDashboardComponent,
-    canActivate: [AdminAuthGuard]
+    component: AdminComponent,
+    children: [
+      {
+        path: "",
+        redirectTo: "login",
+        pathMatch: "full"
+      },
+      {
+        path: "login",
+        component: AdminLoginComponent
+      },
+      {
+        path: "dashboard",
+        component: AdminDashboardComponent,
+        canActivate: [AdminAuthGuard]
+      },
+      {
+        path: "add-medicine",
+        component: AdminAddMedicineComponent,
+        canActivate: [AdminAuthGuard]
+      }
+    ]
   }
 ];
 
