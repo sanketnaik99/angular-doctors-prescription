@@ -24,9 +24,7 @@
             EMAIL: {{ doctor.email }}<br />
             UID: {{ doctor.uid }}
           </p>
-          <a
-            (click)="makeAdmin(doctor.uid, doctor.username)"
-            class="secondary-content"
+          <a (click)="makeAdmin(doctor)" class="secondary-content"
             ><i class="gear material-icons black-text">security</i></a
           >
         </li>
@@ -59,9 +57,7 @@
             EMAIL: {{ patient.email }}<br />
             UID: {{ patient.uid }}
           </p>
-          <a
-            (click)="makeAdmin(patient.uid, patient.username)"
-            class="secondary-content"
+          <a (click)="makeAdmin(patient)" class="secondary-content"
             ><i class="gear material-icons black-text">security</i></a
           >
         </li>
