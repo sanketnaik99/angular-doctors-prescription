@@ -1,6 +1,6 @@
+import { UserData } from "./../../store/models/auth.model";
 import { AdminService } from "./../admin.service";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import * as M from "materialize-css";
 
 @Component({
   selector: "app-admin-dashboard",
@@ -26,12 +26,14 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  makeAdmin(uid: string, username: string) {
+  async makeAdmin(user: UserData) {
     if (
       confirm(
-        `Are you sure you want to make ${username} an admin? \n(Grant All Permissions to this user)`
+        `Are you sure you want to make ${user.username} an admin? \n(Grant All Permissions to this user)`
       )
     ) {
+      const result = await this.adminService.makeAdmin(user);
+      alert(result.message);
     }
   }
 }

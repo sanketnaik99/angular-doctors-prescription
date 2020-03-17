@@ -4,7 +4,6 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthResult } from "../services/auth.service";
 import "firebase/firestore";
-import { EmptyError } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -93,6 +92,34 @@ export class AdminService {
         .valueChanges()
         .subscribe(res => {
           resolve(res);
+        });
+    });
+  }
+
+  makeAdmin(user: UserData): Promise<any> {
+    return new Promise(resolve => {
+      this.afs
+        .collection("Admins")
+        .doc(`${user.uid}`)
+        .get()
+        .subscribe(data => {
+          if (data.exists) {
+            resolve({ result: false, message: "User is already an Admin" });
+          } else {
+            this.afs
+              .collection("Admins")
+              .doc(user.uid)
+              .set({ ...user, isAdmin: true })
+              .then(res => {
+                resolve({
+                  result: true,
+                  message: `${user.username} is now an Admin.`
+                });
+              })
+              .catch(err => {
+                resolve({ result: false, messge: "Error in Processing!" });
+              });
+          }
         });
     });
   }
