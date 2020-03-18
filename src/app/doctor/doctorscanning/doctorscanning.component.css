@@ -9,3 +9,10 @@
   margin: 10px;
   padding-inline: 10px;
 }
+
+.top-left {
+  position: absolute;
+  top: 10px;
+  left: 30%;
+  right: 30%;
+}

@@ -1,11 +1,29 @@
+<nav>
+  <div class="nav-wrapper green accent-4">
+    <a href="#" class="brand-logo navbarfontsize ">SHOW QRCODE </a>
+    <a data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a routerLink="/">HOME</a></li>
+      <li><a routerLink="/">PRESCRIPTIOMS</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div>
   <div>
-    <div>
+    <div [hidden]="!this.stopcamera">
       <video #video class="vid" autoplay></video>
-    </div>
-    <div>
-      <button (click)="capture()">Capture Image</button>
-      <button (click)="closeCamera()">Close Camera</button>
+      <div class="top-left txtcolor">
+        <h4>place prescription here</h4>
+      </div>
+      <div>
+        <button (click)="capture()" class="btnallign">
+          <i class=" large material-icons ">camera</i>
+          <p>CAPTURE</p>
+        </button>
+      </div>
     </div>
 
     <!-- <div class="form-group">
@@ -14,6 +32,14 @@
     </div> -->
     <div>
       <canvas #canvas class="vid"></canvas>
+      <div *ngIf="!this.stopcamera">
+        <button
+          (click)="uploadonclick()"
+          class="waves-effect waves-light btn-large  green darken centerbutton"
+        >
+          upload
+        </button>
+      </div>
     </div>
   </div>
 </div>

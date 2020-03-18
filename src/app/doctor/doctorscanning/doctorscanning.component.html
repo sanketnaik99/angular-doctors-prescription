@@ -14,7 +14,8 @@
   (scanSuccess)="capturedQr($event)"
   (camerasFound)="displayCameras($event)"
   *ngIf="!this.value"
-></zxing-scanner>
+>
+</zxing-scanner>
 <div *ngIf="this.value">
   <div
     class="collection user-card collection-item avatar light-green lighten-3 doctor-patient-item"

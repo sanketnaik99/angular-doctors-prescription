@@ -24,6 +24,7 @@ export class CaptureimageComponent implements OnInit {
   base64 = "";
   stopcamera = true;
   stream: MediaStream;
+  image_file;
 
   constraints = {
     video: {
@@ -89,6 +90,7 @@ export class CaptureimageComponent implements OnInit {
     console.log("Is Stream Active? ", this.stream.active);
     this.stream.getTracks().forEach(track => track.stop());
     console.log(this.stream.active);
+    this.stopcamera = false;
   }
 
   ngOnDestroy() {
@@ -122,8 +124,13 @@ export class CaptureimageComponent implements OnInit {
     const imageBlob = this.dataURItoBlob(this.base64);
     console.log(imageBlob);
     this.capture_image.push(imageBlob);
-    const image_file = new File([imageBlob], "image", { type: "image/jpeg" });
-    this.upload(image_file);
+    this.image_file = new File([imageBlob], "image", { type: "image/jpeg" });
+    //this.upload(this.image_file);
+    this.closeCamera();
+  }
+
+  uploadonclick() {
+    this.upload(this.image_file);
   }
 
   dataURItoBlob(dataURI) {
