@@ -25,7 +25,6 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import { EffectsModule } from "@ngrx/effects";
 import { DoctorscanningComponent } from "./doctor/doctorscanning/doctorscanning.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { from } from "rxjs";
 
 @NgModule({
   declarations: [
@@ -57,7 +56,8 @@ import { from } from "rxjs";
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
