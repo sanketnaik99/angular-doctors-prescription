@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   ViewChild,
+  OnDestroy,
   ElementRef,
   Renderer2
 } from "@angular/core";
@@ -22,6 +23,7 @@ export class CaptureimageComponent implements OnInit {
   capture_image = [];
   base64 = "";
   stopcamera = true;
+  stream: MediaStream;
 
   constraints = {
     video: {
@@ -55,6 +57,8 @@ export class CaptureimageComponent implements OnInit {
     this.startCamera();
   }
   attachVideo(stream) {
+    this.stream = stream;
+
     this.renderer.setProperty(
       this.videoElement.nativeElement,
       "srcObject",
@@ -77,6 +81,25 @@ export class CaptureimageComponent implements OnInit {
         .catch(this.handleError);
     } else {
       alert("Sorry, camera not available.");
+    }
+  }
+  closeCamera() {
+    console.log(this.renderer.data);
+    this.renderer.destroy();
+    console.log("Is Stream Active? ", this.stream.active);
+    this.stream.getTracks().forEach(track => track.stop());
+    console.log(this.stream.active);
+  }
+
+  ngOnDestroy() {
+    console.log("Is Stream Active? ", this.stream.active);
+    if (this.stream.active) {
+      this.stream.getTracks().forEach(track => track.stop());
+      console.log(this.renderer.data);
+      this.renderer.destroy();
+      setTimeout(() => {
+        console.log("Exiting");
+      }, 10000);
     }
   }
 
