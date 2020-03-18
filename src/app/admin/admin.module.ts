@@ -10,6 +10,8 @@ import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.compo
 import { CanActivate } from "@angular/router";
 import { AdminAuthGuard } from "./admin.guard";
 import { AdminNavbarComponent } from "./admin-navbar/admin-navbar.component";
+import { AdminAddMedicineComponent } from "./admin-add-medicine/admin-add-medicine.component";
+import { AdminMedicinesComponent } from "./admin-medicines/admin-medicines.component";
 
 const routes: Routes = [
   {
@@ -34,6 +36,11 @@ const routes: Routes = [
         path: "add-medicine",
         component: AdminAddMedicineComponent,
         canActivate: [AdminAuthGuard]
+      },
+      {
+        path: "medicines",
+        component: AdminMedicinesComponent,
+        canActivate: [AdminAuthGuard]
       }
     ]
   }
@@ -43,7 +50,9 @@ const routes: Routes = [
   declarations: [
     AdminLoginComponent,
     AdminDashboardComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    AdminAddMedicineComponent,
+    AdminMedicinesComponent
   ],
   imports: [
     CommonModule,

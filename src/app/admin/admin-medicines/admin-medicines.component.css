@@ -1,0 +1,15 @@
+.doctor-patient-item {
+  margin-bottom: 5px;
+}
+.user-row {
+  margin: 10px;
+}
+.user-card {
+  margin: 10px;
+  border: none;
+}
+.username {
+  font-size: 26px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
