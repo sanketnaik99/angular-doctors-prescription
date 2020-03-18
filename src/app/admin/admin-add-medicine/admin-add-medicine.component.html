@@ -1,1 +1,146 @@
-<p>admin-add-medicine works!</p>
+<div class="row">
+  <div class="col s12 header">
+    <h3 class="title">Add Medicine</h3>
+    <h4 class="sub-title">
+      Fill the Form below to add a medicine to the database.
+    </h4>
+  </div>
+</div>
+<form
+  (ngSubmit)="submitForm()"
+  [formGroup]="medicineForm"
+  class="medicine-form"
+>
+  <div class="row">
+    <div class="col m1"></div>
+    <div class="col s12 m5 center-align">
+      <div class="input-field col s12">
+        <input
+          id="name"
+          type="text"
+          class=""
+          formControlName="name"
+          #name
+          [ngClass]="{ invalid: submitted && f.name.errors }"
+        />
+        <label for="name">Name</label>
+        <span
+          class="helper-text"
+          data-error="Please enter a valid name."
+          data-success="ok."
+        ></span>
+      </div>
+    </div>
+    <div class="col s12 m5">
+      <div class="input-field col s12">
+        <input
+          id="weight"
+          type="text"
+          class=""
+          formControlName="weight"
+          #name
+          [ngClass]="{ invalid: submitted && f.weight.errors }"
+        />
+        <label for="weight">Weight</label>
+        <span
+          class="helper-text"
+          data-error="Please enter a valid Weight."
+          data-success="ok."
+        ></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col m1"></div>
+    <div class="col s12 m5">
+      <div class="input-field col s12">
+        <input
+          id="id"
+          type="text"
+          class=""
+          formControlName="id"
+          #name
+          [ngClass]="{ invalid: submitted && f.id.errors }"
+        />
+        <label for="id">ID</label>
+        <span
+          class="helper-text"
+          data-error="Please enter a valid ID."
+          data-success="ok."
+        ></span>
+      </div>
+    </div>
+    <div class="col s12 m5">
+      <div class="input-field col s12">
+        <input
+          id="category"
+          type="text"
+          class=""
+          formControlName="category"
+          #name
+          [ngClass]="{ invalid: submitted && f.category.errors }"
+        />
+        <label for="category">Category</label>
+        <span
+          class="helper-text"
+          data-error="Please enter a valid Category."
+          data-success="ok."
+        ></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col m1"></div>
+    <div class="col s12 m5">
+      <div class="row center-align">
+        <div class="input-field col s12">
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onFileChange($event)"
+            name="upload"
+            id="upload"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m5">
+      <div class="row center-align">
+        <img [src]="this.imagePreview" alt="" width="200" />
+        <div class="row center-align">
+          <button
+            class="btn waves-effect waves-light green lighten-1"
+            name="action"
+            (click)="uploadImage()"
+            *ngIf="
+              this.imagePreview && !this.isUploading && !this.uploadSuccess
+            "
+          >
+            Upload
+            <i class="material-icons right">backup</i>
+          </button>
+          <div class="progress" *ngIf="this.isUploading">
+            <div class="indeterminate"></div>
+          </div>
+          <div class="green-text" *ngIf="this.uploadSuccess">Success!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 center-align">
+      <button
+        class="btn-large waves-effect waves-light green lighten-1"
+        type="submit"
+        name="action"
+        *ngIf="this.isLoading"
+      >
+        Add Medicine
+        <i class="material-icons right">add</i>
+      </button>
+      <div class="progress" *ngIf="this.isLoading">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+</form>
