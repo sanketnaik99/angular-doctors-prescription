@@ -1,1 +1,43 @@
+<nav>
+  <div class="nav-wrapper green accent-4">
+    <a href="#" class="brand-logo navbarfontsize ">SCAN QRCODE HERE </a>
+    <a data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a routerLink="/">HOME</a></li>
+    </ul>
+  </div>
+</nav>
 
+<zxing-scanner
+  (scanSuccess)="capturedQr($event)"
+  (camerasFound)="displayCameras($event)"
+  *ngIf="!this.value"
+></zxing-scanner>
+<div *ngIf="this.value">
+  <div
+    class="collection user-card collection-item avatar light-green lighten-3 doctor-patient-item"
+  >
+    <p>
+      EMAIL:{{ email }} <br />
+      UID: {{ scannedvalue }}
+    </p>
+  </div>
+  <br /><br />
+  <div>
+    <div>
+      <button (click)="retry()" class="waves-effect waves-light  btn btnspaces">
+        RETRY
+      </button>
+
+      <button
+        class="waves-effect waves-light  btn btnspaces"
+        style="display:inline-flex"
+        routerLink="/"
+      >
+        CONFIRM
+      </button>
+    </div>
+  </div>
+</div>

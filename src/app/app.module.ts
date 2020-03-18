@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { QRCodeModule } from "angularx-qrcode";
-import { NgQrScannerModule } from "angular2-qrscanner";
+import { ZXingScannerModule } from "@zxing/ngx-scanner";
 
 //Angular Fire Imports
 import { AngularFireModule } from "@angular/fire";
@@ -42,13 +42,14 @@ import { from } from "rxjs";
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    NgQrScannerModule,
+
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
     QRCodeModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
+    ZXingScannerModule,
     StoreModule.forRoot({
       auth: auth_reducer
     }),

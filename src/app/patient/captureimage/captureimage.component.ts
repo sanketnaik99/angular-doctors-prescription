@@ -21,6 +21,7 @@ export class CaptureimageComponent implements OnInit {
   videoHeight = 0;
   capture_image = [];
   base64 = "";
+  stopcamera = true;
 
   constraints = {
     video: {
@@ -78,6 +79,7 @@ export class CaptureimageComponent implements OnInit {
       alert("Sorry, camera not available.");
     }
   }
+
   capture() {
     this.renderer.setProperty(
       this.canvas.nativeElement,

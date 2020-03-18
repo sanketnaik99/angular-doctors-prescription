@@ -23,10 +23,12 @@
     "@ngrx/effects": "^8.6.0",
     "@ngrx/store": "^8.6.0",
     "@ngrx/store-devtools": "^8.6.0",
+    "@zxing/ngx-scanner": "^3.0.0",
     "angular2-qrscanner": "^1.0.7",
     "angularx-qrcode": "^2.1.0",
     "firebase": "^7.8.0",
     "materialize-css": "^1.0.0",
+    "ngx-qr": "^1.1.13",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
