@@ -1,0 +1,33 @@
+<div class="row">
+  <!-- Doctors -->
+  <div class="row">
+    <!-- Title -->
+    <div class="col s12">
+      <h3>Medicines</h3>
+    </div>
+  </div>
+  <div class="row" *ngIf="this.isLoading">
+    <div class="col s12">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!this.isLoading">
+    <div class="col m6 12">
+      <div *ngFor="let medicine of medicines; let i = index">
+        <ul class="collection user-card">
+          <li class="collection-item avatar red lighten-4 doctor-patient-item">
+            <img [src]="medicine.image" alt="" class="circle" />
+            <span class="title username">{{ medicine.name }}</span>
+            <p>
+              Weight/Volume: {{ medicine.weight }}<br />
+              ID: {{ medicine.id }}<br />
+              Category: {{ medicine.category }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

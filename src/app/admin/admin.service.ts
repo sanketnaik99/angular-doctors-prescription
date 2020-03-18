@@ -96,6 +96,17 @@ export class AdminService {
     });
   }
 
+  getMedicineData(): Promise<any[]> {
+    return new Promise(resolve => {
+      this.afs
+        .collection("Medicines")
+        .valueChanges()
+        .subscribe(res => {
+          resolve(res);
+        });
+    });
+  }
+
   makeAdmin(user: UserData): Promise<any> {
     return new Promise(resolve => {
       this.afs
