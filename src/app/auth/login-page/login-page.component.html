@@ -11,19 +11,19 @@
         class="waves-effect waves-light btn-block-patient-doctor btn"
         (click)="getusertype('Doctor')"
         [ngClass]="{
-          darken: this.user_type == 'Doctor',
-          grey: this.user_type == 'Patient'
+          green: this.user_type == 'Doctor',
+          grey: this.user_type == 'Patient' || this.user_type == ''
         }"
       >
         Doctor
       </button>
 
       <button
-        class="waves-effect waves-light btn-block-patient-doctor btn darken"
+        class="waves-effect waves-light btn-block-patient-doctor btn"
         (click)="getusertype('Patient')"
         [ngClass]="{
-          darken: this.user_type == 'Patient',
-          grey: this.user_type == 'Doctor'
+          green: this.user_type == 'Patient',
+          grey: this.user_type == 'Doctor' || this.user_type == ''
         }"
       >
         Patient
