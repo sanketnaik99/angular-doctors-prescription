@@ -13,12 +13,13 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./registrationpage.component.css"]
 })
 export class RegistrationpageComponent implements OnInit {
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   registration_email = "";
   registration_password = "";
   username = "";
   confirmpassword = "";
   loading$: boolean;
+  submitted = false;
   status$: boolean;
   message$: string;
   user_type = "";
@@ -28,7 +29,7 @@ export class RegistrationpageComponent implements OnInit {
     private authService: AuthService,
     private store: Store<AppState>,
     private router: Router,
-    public formbuilder: FormBuilder
+    public formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -39,6 +40,50 @@ export class RegistrationpageComponent implements OnInit {
         this.status$ = data.status;
         this.message$ = data.message;
       });
+    this.registerForm = this.formBuilder.group(
+      {
+        username: ["", Validators.required],
+        email: ["", [Validators.required, Validators.email]],
+        password: ["", [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ["", Validators.required]
+      },
+      {
+        validator: this.MustMatch("password", "confirmPassword")
+      }
+    );
+  }
+
+  get f() {
+    return this.registerForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value));
+  }
+
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        // return if another validator has already found an error on the matchingControl
+        return;
+      }
+
+      // set error on matchingControl if validation fails
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 
   getusertype(value: any) {
@@ -46,19 +91,32 @@ export class RegistrationpageComponent implements OnInit {
     this.user_type = value;
   }
 
-  async register() {
+  runs() {
+    const { value, valid, touched } = this.registerForm;
+    console.log(value);
     this.store.dispatch(
       AuthActions.REGISTER({
         credentials: {
-          email: this.registration_email,
-          password: this.registration_password,
+          email: value["email"],
+          password: value["password"],
           userType: this.user_type,
-          username: this.username
+          username: value["username"]
         }
       })
     );
-    // if (this.status$ == true) {
-    //   this.router.navigate(["/"]);
-    // }
+  }
+
+  async register() {
+    this.submitted = true;
+    console.log(this.registerForm);
+    const { value, valid, touched } = this.registerForm;
+    console.log(value);
+    console.log("FORM VALID? ", valid);
+    if (valid == true) {
+      this.runs();
+      console.log("yes");
+    } else {
+      console.log("no");
+    }
   }
 }

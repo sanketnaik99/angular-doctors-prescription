@@ -27,3 +27,7 @@ h2 {
 .btn-group button:not(:last-child) {
   border-right: none;
 }
+
+.valid {
+  color: red;
+}
