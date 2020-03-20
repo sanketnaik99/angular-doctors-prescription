@@ -12,7 +12,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./login-page.component.css"]
 })
 export class LoginPageComponent implements OnInit {
-  loginform: FormGroup;
   public email = "";
   public password = "";
   public user_type = "";
@@ -20,6 +19,13 @@ export class LoginPageComponent implements OnInit {
   status$: boolean;
   message$: string;
   value = "";
+  submitted: boolean = false;
+
+  loginForm = this.formBuilder.group({
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -34,15 +40,9 @@ export class LoginPageComponent implements OnInit {
         this.status$ = data.status;
         this.message$ = data.message;
       });
-    this.loginform = this.formBuilder.group({
-      //username: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(6)]]
-      //confirmPassword: ["", Validators.required]
-    });
   }
   get f() {
-    return this.loginform.controls;
+    return this.loginForm.controls;
   }
 
   getusertype(value: any) {
@@ -50,19 +50,22 @@ export class LoginPageComponent implements OnInit {
     this.user_type = value;
   }
   onSubmit() {
-    if (this.loginform.invalid) {
+    const {value, valid, touched } = this.loginForm;
+    console.log(value);
+    this.submitted = true;
+    if (!valid) {
       return;
+    }else{
+      this.signIn(value)
     }
-
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.loginform.value));
   }
 
-  async signIn() {
+  async signIn(formValue) {
     this.store.dispatch(
       AuthActions.LOGIN({
         credentiials: {
-          email: this.email,
-          password: this.password,
+          email: formValue['email'],
+          password: formValue['password'],
           userType: this.user_type
         }
       })

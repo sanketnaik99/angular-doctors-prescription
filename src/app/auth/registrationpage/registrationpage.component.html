@@ -29,7 +29,7 @@
         Patient
       </button>
     </div>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="row">
         <div class="input-field col offset-s3 s5 ">
           <input
@@ -118,16 +118,17 @@
           </div>
         </div>
         <div class="offset-s3 s4">
-          <a
+          <button
             class="waves-effect waves-dark btn-large btn-block btn green darken-1"
-            (click)="register()"
+            type="submit"
             *ngIf="this.loading$ == false"
           >
             Register
-          </a>
+
+        </button>
         </div>
       </div>
-
+    </form>
       <!--LOGIN RESULT MESSAGES-->
       <div class="row" style="text-align: center;">
         <div class="col s6">
@@ -139,7 +140,7 @@
           </div>
         </div>
       </div>
-    </form>
+    
   </div>
 </body>
 <router-outlet></router-outlet>

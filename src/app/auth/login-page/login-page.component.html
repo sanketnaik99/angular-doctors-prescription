@@ -26,47 +26,72 @@
     </button>
   </div>
   <br /><br />
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="input-field col offset-s3 s5 ">
+        <input
+          required
+          id="email_inline"
+          formControlName="email"
+          type="email"
+        />
+        <label for="email_inline">Email</label>
+        <div
+          *ngIf="submitted && f.email.errors"
+          class="invalid-feedback valid red-text"
+        >
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
 
-  <div class="row">
-    <div class="input-field col offset-s3 s5 ">
-      <input required [(ngModel)]="email" id="email_inline" type="email" />
-      <label for="email_inline">Email</label>
+    <div class="row">
+      <div class="input-field col offset-s3 s5">
+        <input id="password" formControlName="password" type="password" />
+        <label for="password">Password</label>
+        <div
+          *ngIf="submitted && f.password.errors"
+          class="invalid-feedback valid red-text"
+        >
+          <div *ngIf="f.password.errors.required" class="valid">
+            Password is required
+          </div>
+          <div *ngIf="f.password.errors.minlength" class="valid">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <br />
 
-  <div class="row">
-    <div class="input-field col offset-s3 s5">
-      <input [(ngModel)]="password" id="password" type="password" />
-      <label for="password">Password</label>
+    <div class="row" *ngIf="this.loading$ == true">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="row" *ngIf="this.loading$ == true">
-    <div class="progress">
-      <div class="indeterminate"></div>
+    <div class="row" style="text-align: center " *ngIf="this.loading$ == false">
+      <div class="col s6">
+        <button
+          type="submit"
+          class="waves-effect waves-light btn-large btn-block btn green darken"
+        >
+          LOGIN
+        </button>
+      </div>
+      <div class="col s6">
+        <button
+          routerLink="/registrationpage"
+          class="waves-effect waves-dark btn-large btn-block btn white darken black-text"
+        >
+          Register
+        </button>
+      </div>
     </div>
-  </div>
-
-  <div class="row" style="text-align: center " *ngIf="this.loading$ == false">
-    <div class="col s6">
-      <button
-        (click)="signIn(email, password)"
-        routerLink="/captureimage"
-        class="waves-effect waves-light btn-large btn-block btn green darken"
-      >
-        LOGIN
-      </button>
-    </div>
-    <div class="col s6">
-      <button
-        routerLink="/registrationpage"
-        class="waves-effect waves-dark btn-large btn-block btn white darken black-text"
-      >
-        Register
-      </button>
-    </div>
-  </div>
+  </form>
 
   <div>
     <button routerLink="/qrcode">qrcode</button>
@@ -87,5 +112,3 @@
     </div>
   </div>
 </div>
-
-<router-outlet></router-outlet>
