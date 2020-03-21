@@ -6,6 +6,44 @@
       <h3>Medicines</h3>
     </div>
   </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <button
+        class="btn waves-effect waves-light green"
+        type="submit"
+        name="action"
+      >
+        Refresh Index
+        <i class="material-icons right">refresh</i>
+      </button>
+    </div>
+    <div class="col s12 m6">
+      <div class="row">
+        <div class="col s6">
+          <label for="file">Choose File</label>
+          <input
+            type="file"
+            id="file"
+            (change)="addImage($event.target.files)"
+          />
+        </div>
+        <div class="col s6">
+          <button
+            class="btn waves-effect waves-light green"
+            (click)="uploadImage()"
+            type="submit"
+            name="action"
+          >
+            Submit
+            <i class="material-icons right">cloud_upload</i>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        {{ this.result }}
+      </div>
+    </div>
+  </div>
   <div class="row" *ngIf="this.isLoading">
     <div class="col s12">
       <div class="progress">
