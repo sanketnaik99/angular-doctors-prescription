@@ -11,7 +11,7 @@ import { AdminAuthGuard } from "./admin.guard";
 import { AdminNavbarComponent } from "./admin-navbar/admin-navbar.component";
 import { AdminAddMedicineComponent } from "./admin-add-medicine/admin-add-medicine.component";
 import { AdminMedicinesComponent } from "./admin-medicines/admin-medicines.component";
-
+import { HttpClientModule } from "@angular/common/http";
 const routes: Routes = [
   {
     path: "",
@@ -58,7 +58,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AdminAuthGuard]
 })
