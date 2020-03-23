@@ -13,6 +13,8 @@ import { Observable } from "rxjs";
   templateUrl: "./admin-medicines.component.html",
   styleUrls: ["./admin-medicines.component.css"]
 })
+const BASE_URL = "https://handwriting-recognition-api.herokuapp.com/api/v1";
+
 export class AdminMedicinesComponent implements OnInit {
   isLoading: boolean = true;
   medicines: any[];
@@ -21,6 +23,7 @@ export class AdminMedicinesComponent implements OnInit {
   URL: Observable<string>;
   downloadURL: string;
   result: string = "";
+  predictionSuccess: string = "";
 
   constructor(
     private adminService: AdminService,
@@ -75,13 +78,10 @@ export class AdminMedicinesComponent implements OnInit {
               })
             };
             this.http
-              .post(
-                "http://192.168.1.8:5000/api/v1/predict-medicine",
-                params,
-                config
-              )
+              .post(`${BASE_URL}/predict-medicine`, params, config)
               .subscribe(res => {
-                this.result = res["Prediction"];
+                this.result = res["prediction"];
+                this.predictionSuccess = res["result"];
                 console.log(res);
               });
           });

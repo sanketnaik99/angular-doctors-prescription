@@ -39,9 +39,7 @@
           </button>
         </div>
       </div>
-      <div class="row">
-        {{ this.result }}
-      </div>
+      <div class="row">{{ this.result }} | {{ this.predictionSuccess }}</div>
     </div>
   </div>
   <div class="row" *ngIf="this.isLoading">
