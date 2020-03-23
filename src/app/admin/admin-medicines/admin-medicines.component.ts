@@ -8,13 +8,13 @@ import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
+const BASE_URL = "https://handwriting-recognition-api.herokuapp.com/api/v1";
+
 @Component({
   selector: "app-admin-medicines",
   templateUrl: "./admin-medicines.component.html",
   styleUrls: ["./admin-medicines.component.css"]
 })
-const BASE_URL = "https://handwriting-recognition-api.herokuapp.com/api/v1";
-
 export class AdminMedicinesComponent implements OnInit {
   isLoading: boolean = true;
   medicines: any[];
