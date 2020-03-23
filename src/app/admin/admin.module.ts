@@ -48,6 +48,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AdminLoginComponent,
     AdminDashboardComponent,
     AdminNavbarComponent,
