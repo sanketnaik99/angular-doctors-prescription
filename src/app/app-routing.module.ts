@@ -2,9 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LoginPageComponent } from "./auth/login-page/login-page.component";
 import { RegistrationpageComponent } from "./auth/registrationpage/registrationpage.component";
-import { CaptureimageComponent } from "./patient/captureimage/captureimage.component";
-import { QrcodeComponent } from "./patient/qrcode/qrcode.component";
-import { DoctorscanningComponent } from "./doctor/doctorscanning/doctorscanning.component";
+
 import { from } from "rxjs";
 
 const routes: Routes = [
@@ -17,16 +15,18 @@ const routes: Routes = [
     component: RegistrationpageComponent
   },
   {
-    path: "captureimage",
-    component: CaptureimageComponent
+    path: "patient",
+    loadChildren: "./patient/patient.module#PatientModule"
+  },
+
+  {
+    path: "doctor",
+    loadChildren: "./doctor/doctor.module#DoctorModule"
   },
   {
-    path: "qrcode",
-    component: QrcodeComponent
-  },
-  {
-    path: "doctorscanning",
-    component: DoctorscanningComponent
+    path: "",
+    redirectTo: "",
+    pathMatch: "full"
   }
 ];
 
