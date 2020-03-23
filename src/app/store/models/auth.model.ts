@@ -11,4 +11,5 @@ export interface UserData {
   userType: string;
   username: string;
   uid: string;
+  admin?: boolean;
 }

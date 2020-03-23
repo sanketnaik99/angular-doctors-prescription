@@ -1,0 +1,36 @@
+<nav>
+  <div class="nav-wrapper green accent-4">
+    <a routerLink="/admin/dashboard" class="brand-logo"
+      ><img src="assets/admin-logo.png" alt="Admin" height="60"
+    /></a>
+    <a data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active">DASHBOARD</a>
+      </li>
+      <li>
+        <a routerLink="/admin/medicines" routerLinkActive="active">MEDICINES</a>
+      </li>
+      <li>
+        <a routerLink="/admin/add-medicine" routerLinkActive="active"
+          >ADD MEDICINE</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">DASHBOARD</a>
+  </li>
+  <li>
+    <a routerLink="/admin/medicines" routerLinkActive="active">MEDICINES</a>
+  </li>
+  <li>
+    <a routerLink="/admin/add-medicine" routerLinkActive="active"
+      >ADD MEDICINE</a
+    >
+  </li>
+</ul>

@@ -1,0 +1,69 @@
+<div class="row">
+  <!-- Doctors -->
+  <div class="row">
+    <!-- Title -->
+    <div class="col s12">
+      <h3>Medicines</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <button
+        class="btn waves-effect waves-light green"
+        type="submit"
+        name="action"
+      >
+        Refresh Index
+        <i class="material-icons right">refresh</i>
+      </button>
+    </div>
+    <div class="col s12 m6">
+      <div class="row">
+        <div class="col s6">
+          <label for="file">Choose File</label>
+          <input
+            type="file"
+            id="file"
+            (change)="addImage($event.target.files)"
+          />
+        </div>
+        <div class="col s6">
+          <button
+            class="btn waves-effect waves-light green"
+            (click)="uploadImage()"
+            type="submit"
+            name="action"
+          >
+            Submit
+            <i class="material-icons right">cloud_upload</i>
+          </button>
+        </div>
+      </div>
+      <div class="row">{{ this.result }} | {{ this.predictionSuccess }}</div>
+    </div>
+  </div>
+  <div class="row" *ngIf="this.isLoading">
+    <div class="col s12">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!this.isLoading">
+    <div class="col m6 12">
+      <div *ngFor="let medicine of medicines; let i = index">
+        <ul class="collection user-card">
+          <li class="collection-item avatar red lighten-4 doctor-patient-item">
+            <img [src]="medicine.image" alt="" class="circle" />
+            <span class="title username">{{ medicine.name }}</span>
+            <p>
+              Weight/Volume: {{ medicine.weight }}<br />
+              ID: {{ medicine.id }}<br />
+              Category: {{ medicine.category }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

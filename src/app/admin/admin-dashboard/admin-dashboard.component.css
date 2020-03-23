@@ -1,0 +1,27 @@
+p {
+  font-family: "Roboto", sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.user-row {
+  margin: 10px;
+}
+.user-card {
+  margin: 10px;
+  border: none;
+}
+.username {
+  font-size: 26px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+.gear {
+  font-size: 32px;
+}
+.doctor-patient-item {
+  margin-bottom: 5px;
+}
