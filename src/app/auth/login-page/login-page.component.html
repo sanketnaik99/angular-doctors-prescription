@@ -1,114 +1,115 @@
-<div class="container">
-  <h1>WELCOME</h1>
-  <h2>Sign in to Continue</h2>
-  <br /><br />
-  <div class="btn-group btn-block-patient-doctor row" style="text-align:center">
-    <button
-      class="waves-effect waves-light btn-block-patient-doctor btn"
-      (click)="getusertype('Doctor')"
-      [ngClass]="{
-        green: this.user_type == 'Doctor',
-        grey: this.user_type == 'Patient' || this.user_type == ''
-      }"
-    >
-      Doctor
-    </button>
-
-    <button
-      class="waves-effect waves-light btn-block-patient-doctor btn"
-      (click)="getusertype('Patient')"
-      [ngClass]="{
-        green: this.user_type == 'Patient',
-        grey: this.user_type == 'Doctor' || this.user_type == ''
-      }"
-    >
-      Patient
-    </button>
+<div class="row center-align">
+  <div class="col s12">
+    <h1>WELCOME</h1>
+    <h2>Sign in to Continue</h2>
   </div>
-  <br /><br />
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="input-field col offset-s3 s5 ">
-        <input
-          required
-          id="email_inline"
-          formControlName="email"
-          type="email"
-        />
-        <label for="email_inline">Email</label>
-        <div
-          *ngIf="submitted && f.email.errors"
-          class="invalid-feedback valid red-text"
-        >
-          <div *ngIf="f.email.errors.required">Email is required</div>
-          <div *ngIf="f.email.errors.email">
-            Email must be a valid email address
-          </div>
+</div>
+<br /><br />
+<div class=" row center">
+  <div class="column s12">
+    <div class="btn-group btn-block-patient-doctor ">
+      <button
+        class="waves-effect waves-light btn-block-patient-doctor btn btn-large "
+        (click)="getusertype('Doctor')"
+        [ngClass]="{
+          green: this.user_type == 'Doctor',
+          grey: this.user_type == 'Patient' || this.user_type == ''
+        }"
+      >
+        Doctor
+      </button>
+
+      <button
+        class="waves-effect waves-light btn-block-patient-doctor btn btn-large"
+        (click)="getusertype('Patient')"
+        [ngClass]="{
+          green: this.user_type == 'Patient',
+          grey: this.user_type == 'Doctor' || this.user_type == ''
+        }"
+      >
+        Patient
+      </button>
+    </div>
+  </div>
+</div>
+<br /><br />
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="row center-align">
+    <div class="input-field col col s10 m6 btn-block-patient-doctor ">
+      <input required id="email_inline" formControlName="email" type="email" />
+      <label for="email_inline">Email</label>
+      <div
+        *ngIf="submitted && f.email.errors"
+        class="invalid-feedback valid red-text"
+      >
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">
+          Email must be a valid email address
         </div>
       </div>
     </div>
-    <br />
+  </div>
+  <br />
 
-    <div class="row">
-      <div class="input-field col offset-s3 s5">
-        <input id="password" formControlName="password" type="password" />
-        <label for="password">Password</label>
-        <div
-          *ngIf="submitted && f.password.errors"
-          class="invalid-feedback valid red-text"
-        >
-          <div *ngIf="f.password.errors.required" class="valid">
-            Password is required
-          </div>
-          <div *ngIf="f.password.errors.minlength" class="valid">
-            Password must be at least 6 characters
-          </div>
+  <div class="row center-align">
+    <div class="input-field col col s10 m6 btn-block-patient-doctor">
+      <input id="password" formControlName="password" type="password" />
+      <label for="password">Password</label>
+      <div
+        *ngIf="submitted && f.password.errors"
+        class="invalid-feedback valid red-text"
+      >
+        <div *ngIf="f.password.errors.required" class="valid">
+          Password is required
+        </div>
+        <div *ngIf="f.password.errors.minlength" class="valid">
+          Password must be at least 6 characters
         </div>
       </div>
     </div>
-
-    <div class="row" *ngIf="this.loading$ == true">
-      <div class="progress">
-        <div class="indeterminate"></div>
-      </div>
-    </div>
-
-    <div class="row" style="text-align: center " *ngIf="this.loading$ == false">
-      <div class="col s6">
-        <button
-          type="submit"
-          class="waves-effect waves-light btn-large btn-block btn green darken"
-        >
-          LOGIN
-        </button>
-      </div>
-      <div class="col s6">
-        <button
-          routerLink="/registrationpage"
-          class="waves-effect waves-dark btn-large btn-block btn white darken black-text"
-        >
-          Register
-        </button>
-      </div>
-    </div>
-  </form>
-
-  <div>
-    <button routerLink="patient/qrcode">qrcode</button>
-  </div>
-  <div>
-    <button routerLink="/doctor/scan">doctor scanning</button>
   </div>
 
-  <!--LOGIN RESULT MESSAGES-->
-  <div class="row" style="text-align: center;">
-    <div class="col s6">
-      <div class="card-panel red darken-1" *ngIf="this.status$ == false">
-        <span class="white-text">{{ this.message$ }}</span>
-      </div>
-      <div class="card-panel green darken-1" *ngIf="this.status$ == true">
-        <span class="white-text">{{ this.message$ }}</span>
-      </div>
+  <div class="row" *ngIf="this.loading$ == true">
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+  </div>
+
+  <div class="row" style="text-align: center " *ngIf="this.loading$ == false">
+    <div class="col s12 m6">
+      <button
+        type="submit"
+        class="waves-effect waves-light btn-large btn-block btn green darken input-field col col s10 m6 btn-block-patient-doctor"
+      >
+        LOGIN
+      </button>
+    </div>
+    <div class="col s12 m6">
+      <button
+        routerLink="/registrationpage"
+        class="waves-effect waves-dark btn-large btn-block btn white darken black-text col col s10 m6 btn-block-patient-doctor "
+      >
+        Register
+      </button>
+    </div>
+  </div>
+</form>
+
+<div>
+  <button routerLink="patient/qrcode">qrcode</button>
+</div>
+<div>
+  <button routerLink="/doctor/scan">doctor scanning</button>
+</div>
+
+<!--LOGIN RESULT MESSAGES-->
+<div class="row" style="text-align: center;">
+  <div class="col s6">
+    <div class="card-panel red darken-1" *ngIf="this.status$ == false">
+      <span class="white-text">{{ this.message$ }}</span>
+    </div>
+    <div class="card-panel green darken-1" *ngIf="this.status$ == true">
+      <span class="white-text">{{ this.message$ }}</span>
     </div>
   </div>
 </div>

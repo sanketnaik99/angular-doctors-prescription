@@ -1,14 +1,11 @@
-<body>
-  <div class="container">
-    <h1>Register Here</h1>
+<h1>Register Here</h1>
 
-    <br /><br />
-    <div
-      class="btn-group btn-block-patient-doctor row"
-      style="text-align:center"
-    >
+<br /><br />
+<div class=" row center-align">
+  <div class="col s12">
+    <div class="btn-group input-sizing">
       <button
-        class="waves-effect waves-light btn-block-patient-doctor btn"
+        class="waves-effect waves-light input-sizing btn btn-large"
         (click)="getusertype('Doctor')"
         [ngClass]="{
           green: this.user_type == 'Doctor',
@@ -19,7 +16,7 @@
       </button>
 
       <button
-        class="waves-effect waves-light btn-block-patient-doctor btn"
+        class="waves-effect waves-light input-sizing btn btn-large"
         (click)="getusertype('Patient')"
         [ngClass]="{
           green: this.user_type == 'Patient',
@@ -29,118 +26,109 @@
         Patient
       </button>
     </div>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-      <div class="row">
-        <div class="input-field col offset-s3 s5 ">
-          <input
-            type="text"
-            formControlName="username"
-            id="username"
-            #username
-          />
-          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required" class="valid">
-              First Name is required
-            </div>
-          </div>
-          <label for="name">Username</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col offset-s3 s5 ">
-          <input
-            id="email"
-            type="email"
-            class="validate"
-            formControlName="email"
-            [ngClass]="{ validate: submitted && f.email.errors }"
-          />
-          <label for="email_inline">Email</label>
-          <div
-            *ngIf="submitted && f.email.errors"
-            class="invalid-feedback valid"
-          >
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.email">
-              Email must be a valid email address
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col offset-s3 s5">
-          <input
-            id="password"
-            type="password"
-            formControlName="password"
-            [ngClass]="{ validate: submitted && f.password.errors }"
-          />
-          <label for="password">Password</label>
-          <div
-            *ngIf="submitted && f.password.errors"
-            class="invalid-feedback valid"
-          >
-            <div *ngIf="f.password.errors.required" class="valid">
-              Password is required
-            </div>
-            <div *ngIf="f.password.errors.minlength" class="valid">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col offset-s3 s5">
-          <input
-            id="confirmPassword"
-            type="password"
-            class="validate"
-            formControlName="confirmPassword"
-            [ngClass]="{ validate: submitted && f.password.errors }"
-          />
-          <div *ngIf="submitted && f.confirmPassword.errors" class="valid">
-            <div *ngIf="f.confirmPassword.errors.required" class="valid">
-              Confirm Password is required
-            </div>
-            <div *ngIf="f.confirmPassword.errors.mustMatch" class="valid">
-              Passwords must match
-            </div>
-          </div>
-          <label for="password">Confirm Password</label>
-        </div>
-      </div>
-
-      <div class="row" style="text-align: center">
-        <div *ngIf="this.loading$ == true">
-          <div class="progress">
-            <div class="indeterminate"></div>
-          </div>
-        </div>
-        <div class="offset-s3 s4">
-          <button
-            class="waves-effect waves-dark btn-large btn-block btn green darken-1"
-            type="submit"
-            *ngIf="this.loading$ == false"
-          >
-            Register
-
-        </button>
-        </div>
-      </div>
-    </form>
-      <!--LOGIN RESULT MESSAGES-->
-      <div class="row" style="text-align: center;">
-        <div class="col s6">
-          <div class="card-panel red darken-1" *ngIf="this.status$ == false">
-            <span class="white-text">{{ this.message$ }}</span>
-          </div>
-          <div class="card-panel green darken-1" *ngIf="this.status$ == true">
-            <span class="white-text">{{ this.message$ }}</span>
-          </div>
-        </div>
-      </div>
-    
   </div>
-</body>
+</div>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <div class="row">
+    <div class="input-field col col s10 m6 input-sizing ">
+      <input type="text" formControlName="username" id="username" #username />
+      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+        <div *ngIf="f.username.errors.required" class="valid">
+          First Name is required
+        </div>
+      </div>
+      <label for="name">Username</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col col s10 m6 input-sizing ">
+      <input
+        id="email"
+        type="email"
+        class="validate"
+        formControlName="email"
+        [ngClass]="{ validate: submitted && f.email.errors }"
+      />
+      <label for="email_inline">Email</label>
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback valid">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">
+          Email must be a valid email address
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col col s10 m6 input-sizing ">
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        [ngClass]="{ validate: submitted && f.password.errors }"
+      />
+      <label for="password">Password</label>
+      <div
+        *ngIf="submitted && f.password.errors"
+        class="invalid-feedback valid"
+      >
+        <div *ngIf="f.password.errors.required" class="valid">
+          Password is required
+        </div>
+        <div *ngIf="f.password.errors.minlength" class="valid">
+          Password must be at least 6 characters
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col col s10 m6 input-sizing ">
+      <input
+        id="confirmPassword"
+        type="password"
+        class="validate"
+        formControlName="confirmPassword"
+        [ngClass]="{ validate: submitted && f.password.errors }"
+      />
+      <div *ngIf="submitted && f.confirmPassword.errors" class="valid">
+        <div *ngIf="f.confirmPassword.errors.required" class="valid">
+          Confirm Password is required
+        </div>
+        <div *ngIf="f.confirmPassword.errors.mustMatch" class="valid">
+          Passwords must match
+        </div>
+      </div>
+      <label for="password">Confirm Password</label>
+    </div>
+  </div>
+
+  <div class="row" style="text-align: center">
+    <div *ngIf="this.loading$ == true">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+    </div>
+    <div class="offset-s3 s4">
+      <button
+        class="waves-effect waves-dark btn-large btn-block btn green darken-1"
+        type="submit"
+        *ngIf="this.loading$ == false"
+      >
+        Register
+      </button>
+    </div>
+  </div>
+</form>
+<!--LOGIN RESULT MESSAGES-->
+<div class="row" style="text-align: center;">
+  <div class="col s6">
+    <div class="card-panel red darken-1" *ngIf="this.status$ == false">
+      <span class="white-text">{{ this.message$ }}</span>
+    </div>
+    <div class="card-panel green darken-1" *ngIf="this.status$ == true">
+      <span class="white-text">{{ this.message$ }}</span>
+    </div>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
