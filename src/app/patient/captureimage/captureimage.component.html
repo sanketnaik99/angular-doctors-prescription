@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-wrapper green accent-4">
-    <a href="#" class="brand-logo navbarfontsize ">SHOW QRCODE </a>
+    <a href="#" class="brand-logo navbarfontsize navbartxt ">SHOW QRCODE </a>
     <a data-target="mobile-demo" class="sidenav-trigger"
       ><i class="material-icons">menu</i></a
     >
@@ -15,11 +15,11 @@
   <div>
     <div [hidden]="!this.stopcamera">
       <video #video class="vid" autoplay></video>
-      <div class="top-left txtcolor">
-        <h4>place prescription here</h4>
+      <div class="top txtcolor">
+        <p>PLACE PRESCRIPTION HERE</p>
       </div>
       <div>
-        <button (click)="capture()" class="btnallign">
+        <button (click)="capture()" class="btnallign ">
           <i class=" large material-icons ">camera</i>
           <p>CAPTURE</p>
         </button>

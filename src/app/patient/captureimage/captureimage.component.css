@@ -3,25 +3,31 @@
   height: 100%;
 }
 
-.top-left {
+.navbartxt {
+  font-size: 40px;
+}
+
+.top {
   position: absolute;
-  top: 10px;
+  top: 50px;
   left: 30%;
   right: 30%;
 }
+
 .txtcolor {
   color: white;
+  font-size: 40px;
 }
 
 .btnallign {
   position: absolute;
-  bottom: 5px;
+  bottom: 150px;
   color: white;
   background-color: transparent;
   border: none;
   cursor: pointer;
 
-  right: 10%;
+  right: 1%;
 }
 
 .centerbutton {
@@ -30,15 +36,32 @@
   width: 30%;
 }
 
-@media screen and (device-width: 360px) and (device-height: 640px) {
+@media only screen and (max-width: 768px) {
   .btnallign {
     position: absolute;
-    bottom: 5px;
+
     color: white;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    bottom: 60%;
+    right: 40%;
+  }
 
-    right: 50%;
+  .navbartxt {
+    font-size: 15px;
+  }
+
+  .top {
+    position: absolute;
+    top: 50px;
+    left: 25%;
+    /* right: 30%; */
+  }
+
+  .txtcolor {
+    color: white;
+    font-size: 13px;
+    margin-left: 2%;
   }
 }
