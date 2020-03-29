@@ -8,6 +8,6 @@ import { Component } from "@angular/core";
 export class AppComponent {
   title = "SSM";
   constructor() {
-    console.log("V0.2.4");
+    console.log("V0.2.5");
   }
 }
