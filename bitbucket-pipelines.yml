@@ -10,6 +10,7 @@ pipelines:
     release:
       - step:
           script: # Modify the commands below to build your repository.
+            - npm cache clean --force
             - npm install
             - npm run build:prod
             - pipe: atlassian/firebase-deploy:0.3.0
