@@ -44,24 +44,30 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    bottom: 60%;
+    bottom: 5%;
     right: 40%;
   }
 
   .navbartxt {
     font-size: 15px;
+    font-weight: bold;
   }
 
   .top {
     position: absolute;
-    top: 50px;
+    top: 60px;
     left: 25%;
     /* right: 30%; */
   }
 
   .txtcolor {
     color: white;
-    font-size: 13px;
-    margin-left: 2%;
+    font-size: 15px;
+    /* margin-left: 2%; */
+  }
+  .centerbutton {
+    margin-left: 33%;
+
+    width: 30%;
   }
 }
