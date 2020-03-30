@@ -9,6 +9,6 @@ export class AppComponent {
   title = "SSM";
   constructor() {
     console.log("V0.2.5");
-    console.log("Github");
+    console.log("Github Deploy");
   }
 }
