@@ -30,7 +30,7 @@ export class CaptureimageComponent implements OnInit {
     video: {
       facingMode: "environment",
       width: { ideal: 408 },
-      height: { ideal: 215 }
+      height: { ideal: 216 }
     }
   };
   constructor(
