@@ -8,6 +8,7 @@ import { Component } from "@angular/core";
 export class AppComponent {
   title = "SSM";
   constructor() {
-    console.log("V0.2.0");
+    console.log("V0.2.5");
+    console.log("Pipeline Release");
   }
 }
