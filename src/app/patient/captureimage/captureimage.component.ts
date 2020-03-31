@@ -29,8 +29,8 @@ export class CaptureimageComponent implements OnInit {
   constraints = {
     video: {
       facingMode: "environment",
-      width: { ideal: 408 },
-      height: { ideal: 216 }
+      width: { ideal: 576 },
+      height: { ideal: 576 }
     }
   };
   constructor(
