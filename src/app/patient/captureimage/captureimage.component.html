@@ -14,9 +14,11 @@
 <div>
   <div>
     <div [hidden]="!this.stopcamera">
-      <video #video autoplay class="parentDiv"></video>
-      <div class="top txtcolor">
+      <video #video autoplay></video>
+      <div class="top txtcolor ">
         <p>PLACE PRESCRIPTION HERE</p>
+        <p>{{ this.scrWidth }}</p>
+        <p>{{ this.scrHeight }}</p>
       </div>
       <div>
         <button (click)="capture()" class="btnallign ">
