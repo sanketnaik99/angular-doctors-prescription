@@ -1,13 +1,16 @@
 import {
+  NgModule,
   Component,
   OnInit,
   ViewChild,
   OnDestroy,
   ElementRef,
-  Renderer2
+  Renderer2,
+  HostListener
 } from "@angular/core";
 import { Observable } from "rxjs";
 import { AngularFireStorage } from "@angular/fire/storage";
+
 import "firebase/storage";
 
 @Component({
@@ -25,12 +28,21 @@ export class CaptureimageComponent implements OnInit {
   stopcamera = true;
   stream: MediaStream;
   image_file;
+  scrHeight: any;
+  scrWidth: any;
+
+  // @HostListener("window:resize", ["$event"])
+  // getScreenSize(event?) {
+  //   this.scrHeight = window.innerHeight;
+  //   this.scrWidth = window.innerWidth;
+  //   console.log(this.scrHeight, this.scrWidth);
+  // }
 
   constraints = {
     video: {
       facingMode: "environment",
-      width: { ideal: 576 },
-      height: { ideal: 576 }
+      width: { ideal: 4096 },
+      height: { ideal: 2160 }
     }
   };
   constructor(
@@ -55,6 +67,7 @@ export class CaptureimageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getScreenSize();
     this.startCamera();
   }
   attachVideo(stream) {
