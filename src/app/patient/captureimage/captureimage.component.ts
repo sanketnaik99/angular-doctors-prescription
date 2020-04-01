@@ -67,7 +67,6 @@ export class CaptureimageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getScreenSize();
     this.startCamera();
   }
   attachVideo(stream) {
