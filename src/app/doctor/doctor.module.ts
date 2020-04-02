@@ -6,9 +6,10 @@ import { QRCodeModule } from "angularx-qrcode";
 
 import { DoctorRoutingModule } from "./doctor-routing.module";
 import { DoctorComponent } from './doctor/doctor.component';
+import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 
 @NgModule({
-  declarations: [DoctorscanningComponent, DoctorComponent],
+  declarations: [DoctorscanningComponent, DoctorComponent, DoctorDashboardComponent],
   imports: [CommonModule, DoctorRoutingModule, ZXingScannerModule, QRCodeModule]
 })
 export class DoctorModule {}
