@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { CaptureimageComponent } from "./captureimage/captureimage.component";
 import { QrcodeComponent } from "./qrcode/qrcode.component";
 import { PatientComponent } from "./patient/patient.component";
+import { PatientdashboardComponent } from "./patientdashboard/patientdashboard.component";
 
 const routes: Routes = [
   {
@@ -11,7 +12,11 @@ const routes: Routes = [
 
     children: [
       { path: "qrcode", component: QrcodeComponent },
-      { path: "capture", component: CaptureimageComponent }
+      { path: "capture", component: CaptureimageComponent },
+      {
+        path: "patientboard",
+        component: PatientdashboardComponent
+      }
     ]
   }
 ];
