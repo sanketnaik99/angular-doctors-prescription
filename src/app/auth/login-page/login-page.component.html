@@ -5,11 +5,11 @@
   </div>
 </div>
 <br /><br />
-<div class=" row center">
+<div class="row center">
   <div class="column s12">
-    <div class="btn-group btn-block-patient-doctor ">
+    <div class="btn-group btn-block-patient-doctor">
       <button
-        class="waves-effect waves-light btn-block-patient-doctor btn btn-large "
+        class="waves-effect waves-light btn-block-patient-doctor btn btn-large"
         (click)="getusertype('Doctor')"
         [ngClass]="{
           green: this.user_type == 'Doctor',
@@ -35,7 +35,7 @@
 <br /><br />
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="row center-align">
-    <div class="input-field col col s10 m6 btn-block-patient-doctor ">
+    <div class="input-field col col s10 m6 btn-block-patient-doctor">
       <input required id="email_inline" formControlName="email" type="email" />
       <label for="email_inline">Email</label>
       <div
@@ -75,12 +75,11 @@
     </div>
   </div>
 
-  <div class="row" style="text-align: center " *ngIf="this.loading$ == false">
+  <div class="row" style="text-align: center;" *ngIf="this.loading$ == false">
     <div class="col s12 m6">
       <button
         type="submit"
         class="waves-effect waves-light btn-large btn-block btn green darken input-field col col s10 m6 btn-block-patient-doctor"
-        routerLink="/patient/capture"
       >
         LOGIN
       </button>
@@ -88,7 +87,7 @@
     <div class="col s12 m6">
       <button
         routerLink="/registrationpage"
-        class="waves-effect waves-dark btn-large btn-block btn white darken black-text col col s10 m6 btn-block-patient-doctor "
+        class="waves-effect waves-dark btn-large btn-block btn white darken black-text col col s10 m6 btn-block-patient-doctor"
       >
         Register
       </button>
