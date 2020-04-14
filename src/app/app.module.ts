@@ -22,6 +22,7 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
 import { EffectsModule } from "@ngrx/effects";
 
 import { ReactiveFormsModule } from "@angular/forms";
+import { DoctorserviceService } from "./doctor/doctorservice.service";
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, RegistrationpageComponent],
@@ -50,7 +51,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     EffectsModule.forRoot([AuthEffects]),
     AngularFireStorageModule
   ],
-  providers: [],
+  providers: [DoctorserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

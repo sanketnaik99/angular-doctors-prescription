@@ -1,0 +1,85 @@
+<nav>
+  <div class="nav-wrapper green accent-4">
+    <a href="#" class="brand-logo navbarfontsize ">DASHBOARD</a>
+    <a data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a>Dashboard</a></li>
+      <li routerLink="/doctor/scan"><a>Add Patient</a></li>
+      <li><a> Send Prescription</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- dashbord -->
+<div class="row ">
+  <div class="col s12 m6 doctor-card ">
+    <div class="row">
+      <div class="col s12 ">
+        <h3>Your Profile</h3>
+        <br />
+        <ul class="collection">
+          <li class="collection-item avatar light-blue lighten-4">
+            <img src="assets/doctor.png" alt="" class="circle" />
+            <span class="title"
+              ><h5 class="p1">{{ doctor_profile.username }}</h5></span
+            >
+            <p>
+              EMAIL: {{ doctor_profile.email }}<br />
+              UID: {{ doctor_profile.uid }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- patients chart -->
+  <div
+    class="col s12 m6 doctor-card center-align "
+    *ngIf="this.loading == true"
+  >
+    <br /><br /><br />
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m6 doctor-card ">
+    <div *ngIf="this.patient_status == false">
+      <h3>Patients</h3>
+      <br />
+      <h4>Look like you dont have any patient</h4>
+    </div>
+
+    <div *ngIf="this.patient_status == true && this.loading == false">
+      <div class="row">
+        <div class="col s12">
+          <h3>Patients</h3>
+          <br />
+          <ul class="collection " *ngFor="let patient of patients_profile">
+            <li class="collection-item avatar light-green lighten-3 ">
+              <img src="assets/patient.png" alt="" class="circle" />
+              <span class="title "
+                ><h5 class="p1">{{ patient.username }}</h5></span
+              >
+              <p>
+                EMAIL: {{ patient.email }}<br />
+                UID: {{ patient.uid }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

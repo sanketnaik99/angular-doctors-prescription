@@ -12,7 +12,7 @@ export interface AuthResult {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: "root"
 })
 export class AuthService {
   user;
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   signIn(userCredentials: UserCredentials): Promise<AuthResult> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       //LOGIN
       console.log("AUTH SERVICE LOGIN");
       this.auth
@@ -35,7 +35,7 @@ export class AuthService {
           userCredentials.email,
           userCredentials.password
         )
-        .then(async (res) => {
+        .then(async res => {
           this.user = res.user;
           if (this.user.uid != null) {
             if (this.isEmailVerified()) {
@@ -50,7 +50,7 @@ export class AuthService {
               console.log("USER DATA", this.userData);
               resolve({
                 result: true,
-                message: "Logged in and Email Verified",
+                message: "Logged in and Email Verified"
               });
             } else {
               resolve({ result: false, message: "Email Not Verified" });
@@ -59,11 +59,11 @@ export class AuthService {
             resolve({ result: false, message: "Login Error" });
           }
         })
-        .catch((err) => {
+        .catch(err => {
           resolve({
             result: false,
             message:
-              "The password is invalid or the user does not have a password.",
+              "The password is invalid or the user does not have a password."
           });
         });
     });
@@ -75,7 +75,7 @@ export class AuthService {
     const docRef = this.afs.collection(userType).doc<UserData>(uid);
     let userSnapshot = await docRef.snapshotChanges();
     let user = userSnapshot.pipe(
-      map((snap) => {
+      map(snap => {
         if (snap.payload.exists) {
           const data = snap.payload.data();
           return { ...data };
@@ -85,8 +85,8 @@ export class AuthService {
     if (user == null) {
       return null;
     } else {
-      return new Promise((res) => {
-        user.subscribe((data) => {
+      return new Promise(res => {
+        user.subscribe(data => {
           res(data);
         });
       });
