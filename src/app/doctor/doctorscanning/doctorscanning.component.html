@@ -16,29 +16,41 @@
   *ngIf="!this.value"
 >
 </zxing-scanner>
-<div *ngIf="this.value">
-  <div
-    class="collection user-card collection-item avatar light-green lighten-3 doctor-patient-item"
-  >
-    <p>
-      EMAIL:{{ email }} <br />
-      UID: {{ scannedvalue }}
-    </p>
-  </div>
-  <br /><br />
-  <div>
+<div class="row">
+  <div *ngIf="this.value">
+    <div class="col s12 m6 center-align">
+      <ul class="collection">
+        <li class="collection-item avatar light-green lighten-3 ">
+          <img src="assets/patient.png" alt="" class="circle" />
+          <span class="title "
+            ><h5 class="p1">{{ patient_data.username }}</h5></span
+          >
+          <p>
+            EMAIL:{{ patient_data.email }} <br />
+            UID: {{ scannedvalue }}
+          </p>
+        </li>
+      </ul>
+    </div>
+    <br /><br />
     <div>
-      <button (click)="retry()" class="waves-effect waves-light  btn btnspaces">
-        RETRY
-      </button>
+      <div>
+        <button
+          (click)="retry()"
+          class="waves-effect waves-light  btn btnspaces"
+        >
+          RETRY
+        </button>
 
-      <button
-        class="waves-effect waves-light  btn btnspaces"
-        style="display:inline-flex"
-        routerLink="/"
-      >
-        CONFIRM
-      </button>
+        <button
+          (click)="addvalue()"
+          class="waves-effect waves-light  btn btnspaces"
+          style="display:inline-flex"
+          routerLink="/doctor/dashboard"
+        >
+          Add Patient
+        </button>
+      </div>
     </div>
   </div>
 </div>

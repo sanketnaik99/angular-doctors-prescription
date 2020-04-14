@@ -1,4 +1,7 @@
+import { UserData } from "./../../store/models/auth.model";
 import { Component, OnInit } from "@angular/core";
+
+import { DoctorserviceService } from "../doctorservice.service";
 
 @Component({
   selector: "app-doctor-dashboard",
@@ -6,28 +9,24 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./doctor-dashboard.component.css"]
 })
 export class DoctorDashboardComponent implements OnInit {
-  doctor_profile = {
-    username: "qwwwjwjj",
-    email: "123@gmail.com",
-    uid: "12jwidjwdwdoiwdo"
-  };
+  doctor_profile: UserData;
+  patient_status = true;
+  loading = true;
+  patients_profile: UserData[];
 
-  patients_profile = [
-    {
-      username: "sahil",
-      email: "122@jajs"
-    },
-    {
-      username: "wdwdwd",
-      email: "wdwdwd@kdkd"
-    },
-    {
-      username: "eweewewe",
-      email: "qwowok@1223"
-    }
-  ];
+  constructor(private doctorservice: DoctorserviceService) {}
 
-  constructor() {}
+  ngOnInit() {
+    this.doctorservice.getdata().subscribe(patients => {
+      console.log(patients);
+      this.patients_profile = patients;
+      if (this.patients_profile.length == 0) {
+        this.patient_status = false;
+      }
+      this.loading = false;
+    });
 
-  ngOnInit() {}
+    this.doctor_profile = this.doctorservice.userData;
+    console.log(this.patient_status, "sahil");
+  }
 }

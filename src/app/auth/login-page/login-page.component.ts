@@ -5,11 +5,16 @@ import { Component, OnInit } from "@angular/core";
 import { AppState } from "../../store/models/app-state.model";
 import { AuthActions } from "../../store/actions";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UserData } from "../../models/auth.model";
+import { Router } from "@angular/router";
+import { GET_DB_DATA } from "src/app/store/actions/auth.actions";
+import { getSourceMetadata } from "@ngrx/effects/src/effects_metadata";
+import { DoctorserviceService } from "../../doctor/doctorservice.service";
 
 @Component({
   selector: "app-login-page",
   templateUrl: "./login-page.component.html",
-  styleUrls: ["./login-page.component.css"],
+  styleUrls: ["./login-page.component.css"]
 })
 export class LoginPageComponent implements OnInit {
   public email = "";
@@ -20,15 +25,18 @@ export class LoginPageComponent implements OnInit {
   message$: string = null;
   value = "";
   submitted: boolean = false;
+  typeofuser: UserData;
 
   loginForm = this.formBuilder.group({
     email: ["", [Validators.email, Validators.required]],
-    password: ["", [Validators.required, Validators.minLength(6)]],
+    password: ["", [Validators.required, Validators.minLength(6)]]
   });
 
   constructor(
     private authService: AuthService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private router: Router,
+    private doctorservice: DoctorserviceService
   ) {}
 
   ngOnInit() {}
@@ -57,10 +65,22 @@ export class LoginPageComponent implements OnInit {
     let result = await this.authService.signIn({
       email: formValue["email"],
       password: formValue["password"],
-      userType: this.user_type,
+      userType: this.user_type
     });
     this.loading$ = false;
     this.message$ = result.message;
     this.status$ = result.result;
+
+    if (this.status$ == true) {
+      // this.typeofuser = this.authService.userData;
+
+      if (this.authService.userData.userType == "Doctor") {
+        this.router.navigate(["doctor", "dashboard"]);
+        this.doctorservice.userData = this.authService.userData;
+        console.log(this.doctorservice.userData, "doctors data");
+      } else {
+        this.router.navigate(["patient", "patientboard"]);
+      }
+    }
   }
 }
