@@ -1,17 +1,36 @@
 <nav>
   <div class="nav-wrapper green accent-4">
-    <a href="#" class="brand-logo navbarfontsize ">DASHBOARD</a>
+    <a routerLink="/admin/dashboard" class="brand-logo"
+      ><img src="assets/admin-logo.png" alt="Admin" height="60"
+    /></a>
     <a data-target="mobile-demo" class="sidenav-trigger"
       ><i class="material-icons">menu</i></a
     >
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/doctor/dashboard">Dashboard</a></li>
-      <li><a routerLink="patient/qrcode">Show QR</a></li>
-      <li><a> Scan Prescription</a></li>
-      <li><a> View Prescription</a></li>
+      <li>
+        <a routerLink="/patient/patientboard" routerLinkActive="active"
+          >DASHBOARD</a
+        >
+      </li>
+      <li>
+        <a routerLink="/patient/qrcode" routerLinkActive="active"
+          >Generate QR</a
+        >
+      </li>
     </ul>
   </div>
 </nav>
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a routerLink="/patient/patientboard" routerLinkActive="active"
+      >DASHBOARD</a
+    >
+  </li>
+
+  <li>
+    <a routerLink="/patient/qrcode" routerLinkActive="active">Generate QR</a>
+  </li>
+</ul>
 
 <!-- dashbord -->
 <div class="row ">
