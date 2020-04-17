@@ -23,6 +23,8 @@ import { EffectsModule } from "@ngrx/effects";
 
 import { ReactiveFormsModule } from "@angular/forms";
 import { DoctorserviceService } from "./doctor/doctorservice.service";
+import { PatientserviceService } from "./patient/patientservice.service";
+import { from } from "rxjs";
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, RegistrationpageComponent],
@@ -51,7 +53,7 @@ import { DoctorserviceService } from "./doctor/doctorservice.service";
     EffectsModule.forRoot([AuthEffects]),
     AngularFireStorageModule
   ],
-  providers: [DoctorserviceService],
+  providers: [DoctorserviceService, PatientserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

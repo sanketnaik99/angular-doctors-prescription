@@ -1,6 +1,6 @@
 import { UserData } from "./../../store/models/auth.model";
-import { Component, OnInit } from "@angular/core";
-
+import { Component, OnInit, AfterViewInit } from "@angular/core";
+import * as M from "materialize-css";
 import { DoctorserviceService } from "../doctorservice.service";
 
 @Component({
@@ -8,7 +8,7 @@ import { DoctorserviceService } from "../doctorservice.service";
   templateUrl: "./doctor-dashboard.component.html",
   styleUrls: ["./doctor-dashboard.component.css"]
 })
-export class DoctorDashboardComponent implements OnInit {
+export class DoctorDashboardComponent implements OnInit, AfterViewInit {
   doctor_profile: UserData;
   patient_status = true;
   loading = true;
@@ -28,5 +28,12 @@ export class DoctorDashboardComponent implements OnInit {
 
     this.doctor_profile = this.doctorservice.userData;
     console.log(this.patient_status, "sahil");
+  }
+  ngAfterViewInit(): void {
+    setTimeout(function() {
+      // var elem = document.querySelector(".sidenav");
+      // var instance = M.Sidenav.init(elem);
+      var instance = M.AutoInit();
+    }, 0);
   }
 }

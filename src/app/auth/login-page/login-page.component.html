@@ -35,9 +35,17 @@
 <br /><br />
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="row center-align">
-    <div class="input-field col col s10 m6 btn-block-patient-doctor">
-      <input required id="email_inline" formControlName="email" type="email" />
-      <label for="email_inline">Email</label>
+    <div class="col s10 m6 btn-block-patient-doctor">
+      <div class="input-field">
+        <input
+          id="email"
+          type="email"
+          class="validate"
+          formControlName="email"
+        />
+        <label for="email">Email</label>
+      </div>
+
       <div
         *ngIf="submitted && f.email.errors"
         class="invalid-feedback valid red-text"

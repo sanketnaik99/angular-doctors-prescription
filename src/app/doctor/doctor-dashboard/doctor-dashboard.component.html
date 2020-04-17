@@ -1,16 +1,32 @@
 <nav>
   <div class="nav-wrapper green accent-4">
-    <a href="#" class="brand-logo navbarfontsize ">DASHBOARD</a>
+    <a routerLink="/admin/dashboard" class="brand-logo"
+      ><img src="assets/admin-logo.png" alt="Admin" height="60"
+    /></a>
     <a data-target="mobile-demo" class="sidenav-trigger"
       ><i class="material-icons">menu</i></a
     >
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a>Dashboard</a></li>
-      <li routerLink="/doctor/scan"><a>Add Patient</a></li>
-      <li><a> Send Prescription</a></li>
+      <li>
+        <a routerLink="/doctor/dashboard" routerLinkActive="active"
+          >DASHBOARD</a
+        >
+      </li>
+      <li>
+        <a routerLink="/doctor/scan" routerLinkActive="active">ADD Patient</a>
+      </li>
     </ul>
   </div>
 </nav>
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a routerLink="/doctor/dashboard" routerLinkActive="active">DASHBOARD</a>
+  </li>
+
+  <li>
+    <a routerLink="/doctor/scan" routerLinkActive="active">ADD Patient</a>
+  </li>
+</ul>
 
 <!-- dashbord -->
 <div class="row ">

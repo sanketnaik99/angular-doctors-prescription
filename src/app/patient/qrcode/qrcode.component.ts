@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import * as M from "materialize-css";
+import { PatientserviceService } from "../patientservice.service";
+import { UserData } from "../../models/auth.model";
 
 @Component({
   selector: "app-qrcode",
@@ -8,12 +10,20 @@ import * as M from "materialize-css";
 })
 export class QrcodeComponent implements OnInit, AfterViewInit {
   patient_uid = "";
+  patient_profile: UserData;
 
-  constructor() {
-    this.patient_uid = "WDRf74S2GVMdzPedLxgm97VIrZx1";
+  constructor(public patientservice: PatientserviceService) {}
+
+  ngOnInit() {
+    this.patient_profile = this.patientservice.userData;
+
+    this.patientservice
+      .getpatientdata(this.patient_profile.uid)
+      .subscribe(res => {
+        console.log(res);
+        this.patient_uid = res.uid;
+      });
   }
-
-  ngOnInit() {}
   ngAfterViewInit(): void {
     setTimeout(function() {
       var elem = document.querySelector(".sidenav");

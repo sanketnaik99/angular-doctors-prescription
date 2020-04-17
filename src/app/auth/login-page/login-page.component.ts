@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 import { GET_DB_DATA } from "src/app/store/actions/auth.actions";
 import { getSourceMetadata } from "@ngrx/effects/src/effects_metadata";
 import { DoctorserviceService } from "../../doctor/doctorservice.service";
+import { PatientserviceService } from "../../patient/patientservice.service";
 
 @Component({
   selector: "app-login-page",
@@ -36,7 +37,8 @@ export class LoginPageComponent implements OnInit {
     private authService: AuthService,
     public formBuilder: FormBuilder,
     private router: Router,
-    private doctorservice: DoctorserviceService
+    private doctorservice: DoctorserviceService,
+    private patientservice: PatientserviceService
   ) {}
 
   ngOnInit() {}
@@ -50,7 +52,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    const { value, valid, touched } = this.loginForm;
+    const { value, valid } = this.loginForm;
     console.log(value);
     this.submitted = true;
     if (!valid) {
@@ -79,6 +81,7 @@ export class LoginPageComponent implements OnInit {
         this.doctorservice.userData = this.authService.userData;
         console.log(this.doctorservice.userData, "doctors data");
       } else {
+        this.patientservice.userData = this.authService.userData;
         this.router.navigate(["patient", "patientboard"]);
       }
     }

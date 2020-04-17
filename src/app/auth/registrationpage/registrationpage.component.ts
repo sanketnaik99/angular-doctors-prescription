@@ -6,6 +6,7 @@ import { from } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AuthActions } from "../../store/actions";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import * as M from "materialize-css";
 
 @Component({
   selector: "app-registrationpage",
