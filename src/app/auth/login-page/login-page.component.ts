@@ -10,6 +10,8 @@ import { Router } from "@angular/router";
 import { GET_DB_DATA } from "src/app/store/actions/auth.actions";
 import { getSourceMetadata } from "@ngrx/effects/src/effects_metadata";
 import { DoctorserviceService } from "../../doctor/doctorservice.service";
+import * as M from "materialize-css";
+
 import { PatientserviceService } from "../../patient/patientservice.service";
 
 @Component({
@@ -42,6 +44,13 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+  ngAfterViewInit(): void {
+    setTimeout(function() {
+      // var elem = document.querySelector(".sidenav");
+      // var instance = M.Sidenav.init(elem);
+      var instance = M.AutoInit();
+    }, 0);
+  }
   get f() {
     return this.loginForm.controls;
   }

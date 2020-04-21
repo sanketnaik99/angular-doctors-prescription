@@ -30,8 +30,8 @@ export class PatientdashboardComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     setTimeout(function() {
-      // var elem = document.querySelector(".sidenav");
-      // var instance = M.Sidenav.init(elem);
+      var elem = document.querySelector(".sidenav");
+      var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();
     }, 0);
   }

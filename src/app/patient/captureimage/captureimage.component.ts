@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { Observable } from "rxjs";
 import { AngularFireStorage } from "@angular/fire/storage";
+import * as M from "materialize-css";
 
 import "firebase/storage";
 
@@ -157,5 +158,13 @@ export class CaptureimageComponent implements OnInit {
     }
     const blob = new Blob([int8Array], { type: "image/jpeg" });
     return blob;
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(function() {
+      // var elem = document.querySelector(".sidenav");
+      // var instance = M.Sidenav.init(elem);
+      var instance = M.AutoInit();
+    }, 0);
   }
 }

@@ -10,12 +10,17 @@
     </ul>
   </div>
 </nav>
+<ul class="sidenav" id="mobile-demo">
+  <li><a routerLink="/patient/patientboard">HOME</a></li>
+  <li><a routerLink="/">PRESCRIPTIOMS</a></li>
+</ul>
 
 <div>
   <qrcode
     class="qrcode-container"
     [qrdata]="patient_uid"
     [width]="300"
+    [colorLight]="ffffffff"
   ></qrcode>
 </div>
 

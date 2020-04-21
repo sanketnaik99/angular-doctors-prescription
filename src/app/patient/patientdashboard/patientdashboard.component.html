@@ -1,8 +1,6 @@
 <nav>
   <div class="nav-wrapper green accent-4">
-    <a routerLink="/admin/dashboard" class="brand-logo"
-      ><img src="assets/admin-logo.png" alt="Admin" height="60"
-    /></a>
+    <a routerLink="/admin/dashboard" class="brand-logo"> </a>
     <a data-target="mobile-demo" class="sidenav-trigger"
       ><i class="material-icons">menu</i></a
     >
@@ -42,9 +40,7 @@
         <ul class="collection">
           <li class="collection-item avatar light-blue lighten-4">
             <img src="assets/patient.png" alt="" class="circle" />
-            <span class="title"
-              ><h5 class="p1">{{ patient_profile.username }}</h5></span
-            >
+            <span class="title username">{{ patient_profile.username }}</span>
             <p>
               EMAIL: {{ patient_profile.email }}<br />
               UID: {{ patient_profile.uid }}
