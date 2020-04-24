@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { DoctorserviceService } from "../doctorservice.service";
 import { UserData } from "./../../store/models/auth.model";
+import * as M from "materialize-css";
 
 @Component({
   selector: "app-doctorscanning",
@@ -37,5 +38,12 @@ export class DoctorscanningComponent implements OnInit {
 
   retry() {
     this.value = false;
+  }
+  ngAfterViewInit(): void {
+    setTimeout(function() {
+      // var elem = document.querySelector(".sidenav");
+      // var instance = M.Sidenav.init(elem);
+      var instance = M.AutoInit();
+    }, 0);
   }
 }

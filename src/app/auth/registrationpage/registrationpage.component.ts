@@ -54,6 +54,14 @@ export class RegistrationpageComponent implements OnInit {
     );
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(function() {
+      // var elem = document.querySelector(".sidenav");
+      // var instance = M.Sidenav.init(elem);
+      var instance = M.AutoInit();
+    }, 0);
+  }
+
   get f() {
     return this.registerForm.controls;
   }

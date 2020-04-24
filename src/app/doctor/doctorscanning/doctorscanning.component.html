@@ -5,10 +5,15 @@
       ><i class="material-icons">menu</i></a
     >
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/">HOME</a></li>
+      <li><a routerLink="/doctor/dashboard">HOME</a></li>
     </ul>
   </div>
 </nav>
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a routerLink="/doctor/dashboard" routerLinkActive="active">HOME</a>
+  </li>
+</ul>
 
 <zxing-scanner
   (scanSuccess)="capturedQr($event)"
