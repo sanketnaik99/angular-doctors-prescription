@@ -6,7 +6,7 @@ import {
   OnDestroy,
   ElementRef,
   Renderer2,
-  HostListener
+  HostListener,
 } from "@angular/core";
 import { Observable } from "rxjs";
 import { AngularFireStorage } from "@angular/fire/storage";
@@ -17,7 +17,7 @@ import "firebase/storage";
 @Component({
   selector: "app-captureimage",
   templateUrl: "./captureimage.component.html",
-  styleUrls: ["./captureimage.component.css"]
+  styleUrls: ["./captureimage.component.css"],
 })
 export class CaptureimageComponent implements OnInit {
   @ViewChild("video", { static: true }) videoElement: ElementRef;
@@ -45,8 +45,8 @@ export class CaptureimageComponent implements OnInit {
     video: {
       facingMode: "environment",
       width: { ideal: 4096 },
-      height: { ideal: 2160 }
-    }
+      height: { ideal: 2160 },
+    },
   };
   constructor(
     private renderer: Renderer2,
@@ -58,14 +58,14 @@ export class CaptureimageComponent implements OnInit {
   upload(image) {
     console.log(image);
     let timestamp = Date.now().toString();
-    let ref = this.storage.ref(`captures/${timestamp}`);
+    let ref = this.storage.ref(`captures/test`);
     ref
       .put(image)
-      .then(res => {
+      .then((res) => {
         console.log(res);
       })
-      .catch(err => {
-        console.error("ERROR : ", err);
+      .catch((err) => {
+        console.error("[UPLOAD ERROR] : ", err);
       });
   }
 
@@ -81,7 +81,7 @@ export class CaptureimageComponent implements OnInit {
       stream
     );
 
-    this.renderer.listen(this.videoElement.nativeElement, "play", event => {
+    this.renderer.listen(this.videoElement.nativeElement, "play", (event) => {
       this.videoHeight = this.videoElement.nativeElement.videoHeight;
       this.videoWidth = this.videoElement.nativeElement.videoWidth;
     });
@@ -103,7 +103,7 @@ export class CaptureimageComponent implements OnInit {
     console.log(this.renderer.data);
     this.renderer.destroy();
     console.log("Is Stream Active? ", this.stream.active);
-    this.stream.getTracks().forEach(track => track.stop());
+    this.stream.getTracks().forEach((track) => track.stop());
     console.log(this.stream.active);
     this.stopcamera = false;
   }
@@ -111,7 +111,7 @@ export class CaptureimageComponent implements OnInit {
   ngOnDestroy() {
     console.log("Is Stream Active? ", this.stream.active);
     if (this.stream.active) {
-      this.stream.getTracks().forEach(track => track.stop());
+      this.stream.getTracks().forEach((track) => track.stop());
       console.log(this.renderer.data);
       this.renderer.destroy();
       setTimeout(() => {
@@ -168,7 +168,7 @@ export class CaptureimageComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(function() {
+    setTimeout(function () {
       // var elem = document.querySelector(".sidenav");
       // var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();
