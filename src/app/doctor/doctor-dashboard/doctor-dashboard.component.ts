@@ -2,6 +2,7 @@ import { UserData } from "./../../store/models/auth.model";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import * as M from "materialize-css";
 import { DoctorserviceService } from "../doctorservice.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-doctor-dashboard",
@@ -14,7 +15,10 @@ export class DoctorDashboardComponent implements OnInit, AfterViewInit {
   loading = true;
   patients_profile: UserData[];
 
-  constructor(private doctorservice: DoctorserviceService) {}
+  constructor(
+    private doctorservice: DoctorserviceService,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit() {
     this.doctorservice.getdata().subscribe(patients => {
@@ -35,5 +39,9 @@ export class DoctorDashboardComponent implements OnInit, AfterViewInit {
       // var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();
     }, 0);
+  }
+
+  async logout() {
+    await this.authservice.logout();
   }
 }

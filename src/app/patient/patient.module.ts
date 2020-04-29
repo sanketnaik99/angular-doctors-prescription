@@ -7,6 +7,7 @@ import { PatientRoutingModule } from "./patient-routing.module";
 import { PatientComponent } from "./patient/patient.component";
 import { PatientdashboardComponent } from "./patientdashboard/patientdashboard.component";
 import { PatientserviceService } from "./patientservice.service";
+import { ImageCropperModule } from "ngx-image-cropper";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,12 @@ import { PatientserviceService } from "./patientservice.service";
     PatientComponent,
     PatientdashboardComponent
   ],
-  imports: [CommonModule, PatientRoutingModule, QRCodeModule],
+  imports: [
+    CommonModule,
+    PatientRoutingModule,
+    QRCodeModule,
+    ImageCropperModule
+  ],
   providers: []
 })
 export class PatientModule {}

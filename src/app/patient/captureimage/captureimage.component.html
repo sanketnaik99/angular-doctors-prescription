@@ -1,21 +1,21 @@
 <nav>
   <div class="nav-wrapper green accent-4">
-    <a href="#" class="brand-logo navbarfontsize navbartxt ">SHOW QRCODE </a>
+    <a class="brand-logo navbarfontsize navbartxt "
+      >Click Image Of Prescription
+    </a>
     <a data-target="mobile-demo" class="sidenav-trigger"
       ><i class="material-icons">menu</i></a
     >
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/">HOME</a></li>
-      <li><a routerLink="/">PRESCRIPTIOMS</a></li>
+      <li><a routerLink="/patient/patientboard">HOME</a></li>
     </ul>
   </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
   <li>
-    <a routerLink="/" routerLinkActive="active">HOME</a>
+    <a routerLink="/patient/patientboard" routerLinkActive="active">HOME</a>
   </li>
-  <li><a routerLink="/">PRESCRIPTIOMS</a></li>
 </ul>
 
 <div>
@@ -24,8 +24,6 @@
       <video #video autoplay class="vid"></video>
       <div class="top txtcolor ">
         <p>PLACE PRESCRIPTION HERE</p>
-        <p>{{ this.scrWidth }}</p>
-        <p>{{ this.scrHeight }}</p>
       </div>
       <div>
         <button (click)="capture()" class="btnallign ">
@@ -34,20 +32,25 @@
       </div>
     </div>
 
-    <!-- <div class="form-group">
-      <label for="file">Choose File</label>
-      <input type="file" id="file" (change)="upload($event.target.files)" />
-    </div> -->
     <div>
-      <canvas #canvas class="vid"></canvas>
-      <div *ngIf="!this.stopcamera">
-        <button
-          (click)="uploadonclick()"
-          class="waves-effect waves-light btn-large  green darken centerbutton"
-        >
-          upload
-        </button>
-      </div>
+      <canvas #canvas class="vid" [hidden]="!this.iscropping"></canvas>
+    </div>
+  </div>
+  <div>
+    <image-cropper
+      [imageFile]="this.image_file"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+    ></image-cropper>
+    <div *ngIf="!this.stopcamera">
+      <button
+        (click)="uploadonclick()"
+        class="waves-effect waves-light btn-large  green darken centerbutton"
+      >
+        upload
+      </button>
     </div>
   </div>
 </div>
