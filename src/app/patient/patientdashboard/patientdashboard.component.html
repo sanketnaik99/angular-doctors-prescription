@@ -15,6 +15,14 @@
           >Generate QR</a
         >
       </li>
+      <li>
+        <a routerLink="/patient/capture" routerLinkActive="active"
+          >Prescription Scan</a
+        >
+      </li>
+      <li>
+        <a routerLink="/" (click)="logout()">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -27,6 +35,14 @@
 
   <li>
     <a routerLink="/patient/qrcode" routerLinkActive="active">Generate QR</a>
+  </li>
+  <li>
+    <a routerLink="/patient/capture" routerLinkActive="active"
+      >Prescription Scan</a
+    >
+  </li>
+  <li>
+    <a routerLink="/" (click)="logout()">Logout</a>
   </li>
 </ul>
 

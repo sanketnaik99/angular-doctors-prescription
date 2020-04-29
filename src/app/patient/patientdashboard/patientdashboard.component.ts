@@ -2,7 +2,8 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { UserData } from "../../models/auth.model";
 import { PatientserviceService } from "../patientservice.service";
 import * as M from "materialize-css";
-
+import { AuthService } from "../../services/auth.service";
+import { from } from "rxjs";
 @Component({
   selector: "app-patientdashboard",
   templateUrl: "./patientdashboard.component.html",
@@ -23,7 +24,10 @@ export class PatientdashboardComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  constructor(private patientservice: PatientserviceService) {}
+  constructor(
+    private patientservice: PatientserviceService,
+    private authservice: AuthService
+  ) {}
 
   ngOnInit() {
     this.patient_profile = this.patientservice.userData;
@@ -34,5 +38,9 @@ export class PatientdashboardComponent implements OnInit, AfterViewInit {
       var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();
     }, 0);
+  }
+
+  async logout() {
+    await this.authservice.logout();
   }
 }

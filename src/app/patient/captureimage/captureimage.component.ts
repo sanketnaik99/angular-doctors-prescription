@@ -11,7 +11,7 @@ import {
 import { Observable } from "rxjs";
 import { AngularFireStorage } from "@angular/fire/storage";
 import * as M from "materialize-css";
-
+import { ImageCroppedEvent } from "ngx-image-cropper";
 import "firebase/storage";
 
 @Component({
@@ -31,6 +31,8 @@ export class CaptureimageComponent implements OnInit {
   image_file;
   scrHeight: any;
   scrWidth: any;
+  croppedImage: any = "";
+  iscropping = true;
 
   // @HostListener("window:resize", ["$event"])
   // getScreenSize(event?) {
@@ -140,10 +142,15 @@ export class CaptureimageComponent implements OnInit {
     this.image_file = new File([imageBlob], "image", { type: "image/jpeg" });
     //this.upload(this.image_file);
     this.closeCamera();
+    this.iscropping = false;
+    // this.retry = false;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
   }
 
   uploadonclick() {
-    this.upload(this.image_file);
+    this.upload(this.croppedImage);
   }
 
   dataURItoBlob(dataURI) {

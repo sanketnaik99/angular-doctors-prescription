@@ -100,4 +100,8 @@ export class AuthService {
   getUser() {
     return this.auth.user;
   }
+
+  logout() {
+    this.auth.signOut();
+  }
 }
