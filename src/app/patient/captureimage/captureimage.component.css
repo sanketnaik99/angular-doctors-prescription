@@ -65,6 +65,9 @@
     font-size: 15px;
     font-weight: bold;
   }
+  #sidenav-overlay {
+    background-color: transparent;
+  }
 
   .top {
     position: absolute;
