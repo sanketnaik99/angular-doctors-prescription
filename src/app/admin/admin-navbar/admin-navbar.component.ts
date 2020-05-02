@@ -1,21 +1,23 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
 import * as M from "materialize-css";
 
 @Component({
   selector: "app-admin-navbar",
   templateUrl: "./admin-navbar.component.html",
-  styleUrls: ["./admin-navbar.component.css"]
+  styleUrls: ["./admin-navbar.component.css"],
 })
-export class AdminNavbarComponent implements OnInit, AfterViewInit {
-  constructor() {}
+export class AdminNavbarComponent implements OnInit {
+  isNavbarOpen: boolean = false;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
-  ngAfterViewInit(): void {
-    setTimeout(function() {
-      // var elem = document.querySelector(".sidenav");
-      // var instance = M.Sidenav.init(elem);
-      var instance = M.AutoInit();
-    }, 0);
+  async toggleNavbar() {}
+
+  routeToPage(path) {
+    this.isNavbarOpen = false;
+    this.router.navigate(path);
   }
 }

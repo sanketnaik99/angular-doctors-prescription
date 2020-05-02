@@ -24,7 +24,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { ReactiveFormsModule } from "@angular/forms";
 import { DoctorserviceService } from "./doctor/doctorservice.service";
 import { PatientserviceService } from "./patient/patientservice.service";
-import { from } from "rxjs";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, RegistrationpageComponent],
@@ -34,7 +34,6 @@ import { from } from "rxjs";
     AppRoutingModule,
     RouterModule,
     FormsModule,
-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
@@ -43,17 +42,18 @@ import { from } from "rxjs";
     ReactiveFormsModule,
 
     StoreModule.forRoot({
-      auth: auth_reducer
+      auth: auth_reducer,
     }),
     AngularFireStorageModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production
+      logOnly: environment.production,
     }),
     EffectsModule.forRoot([AuthEffects]),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule,
   ],
   providers: [DoctorserviceService, PatientserviceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

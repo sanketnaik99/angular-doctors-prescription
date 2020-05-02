@@ -1,3 +1,4 @@
+import { SharedModule } from "./../shared/shared.module";
 import { AdminComponent } from "./admin/admin.component";
 import { AdminService } from "./admin.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -21,29 +22,29 @@ const routes: Routes = [
       {
         path: "",
         redirectTo: "login",
-        pathMatch: "full"
+        pathMatch: "full",
       },
       {
         path: "login",
-        component: AdminLoginComponent
+        component: AdminLoginComponent,
       },
       {
         path: "dashboard",
         component: AdminDashboardComponent,
-        canActivate: [AdminAuthGuard]
+        canActivate: [AdminAuthGuard],
       },
       {
         path: "add-medicine",
         component: AdminAddMedicineComponent,
-        canActivate: [AdminAuthGuard]
+        canActivate: [AdminAuthGuard],
       },
       {
         path: "medicines",
         component: AdminMedicinesComponent,
-        canActivate: [AdminAuthGuard]
-      }
-    ]
-  }
+        canActivate: [AdminAuthGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -53,15 +54,16 @@ const routes: Routes = [
     AdminDashboardComponent,
     AdminNavbarComponent,
     AdminAddMedicineComponent,
-    AdminMedicinesComponent
+    AdminMedicinesComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
   ],
-  providers: [AdminAuthGuard]
+  providers: [AdminAuthGuard],
 })
 export class AdminModule {}

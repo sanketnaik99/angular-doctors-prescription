@@ -1,2 +1,7 @@
-<app-admin-navbar *ngIf="this.adminService.isAdmin"></app-admin-navbar>
+<!-- <app-admin-navbar *ngIf="this.adminService.isAdmin"></app-admin-navbar> -->
+<app-navbar
+  imagePath="assets/admin-logo.png"
+  [routes]="this.routes"
+  *ngIf="this.adminService.isAdmin"
+></app-navbar>
 <router-outlet></router-outlet>
