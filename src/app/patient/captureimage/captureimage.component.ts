@@ -6,18 +6,22 @@ import {
   OnDestroy,
   ElementRef,
   Renderer2,
-  HostListener
+  HostListener,
 } from "@angular/core";
 import { Observable } from "rxjs";
-import { AngularFireStorage } from "@angular/fire/storage";
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from "@angular/fire/storage";
 import * as M from "materialize-css";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import "firebase/storage";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-captureimage",
   templateUrl: "./captureimage.component.html",
-  styleUrls: ["./captureimage.component.css"]
+  styleUrls: ["./captureimage.component.css"],
 })
 export class CaptureimageComponent implements OnInit {
   @ViewChild("video", { static: true }) videoElement: ElementRef;
@@ -34,6 +38,9 @@ export class CaptureimageComponent implements OnInit {
   croppedImage: any = "";
   iscropping = true;
   convert_image;
+  task: AngularFireUploadTask;
+  URL: Observable<String>;
+  imageURL: String;
 
   // @HostListener("window:resize", ["$event"])
   // getScreenSize(event?) {
@@ -46,8 +53,8 @@ export class CaptureimageComponent implements OnInit {
     video: {
       facingMode: "environment",
       width: { ideal: 4096 },
-      height: { ideal: 2160 }
-    }
+      height: { ideal: 2160 },
+    },
   };
   constructor(
     private renderer: Renderer2,
@@ -57,17 +64,27 @@ export class CaptureimageComponent implements OnInit {
   }
 
   upload(image) {
-    console.log(image);
     let timestamp = Date.now().toString();
-    let ref = this.storage.ref(`captures/test`);
-    ref
-      .put(image)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error("[UPLOAD ERROR] : ", err);
-      });
+
+    const path = `captures/test`;
+    console.log("Starting upload");
+
+    let ref = this.storage.ref(path);
+    this.task = this.storage.upload(path, image);
+    this.task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          console.log("Image Uploaded");
+
+          this.URL = ref.getDownloadURL();
+          this.URL.subscribe((res) => {
+            this.imageURL = res;
+            console.log("IMAGE URL", this.imageURL);
+          });
+        })
+      )
+      .subscribe();
   }
 
   ngOnInit() {
@@ -82,7 +99,7 @@ export class CaptureimageComponent implements OnInit {
       stream
     );
 
-    this.renderer.listen(this.videoElement.nativeElement, "play", event => {
+    this.renderer.listen(this.videoElement.nativeElement, "play", (event) => {
       this.videoHeight = this.videoElement.nativeElement.videoHeight;
       this.videoWidth = this.videoElement.nativeElement.videoWidth;
     });
@@ -104,7 +121,7 @@ export class CaptureimageComponent implements OnInit {
     console.log(this.renderer.data);
     this.renderer.destroy();
     console.log("Is Stream Active? ", this.stream.active);
-    this.stream.getTracks().forEach(track => track.stop());
+    this.stream.getTracks().forEach((track) => track.stop());
     console.log(this.stream.active);
     this.stopcamera = false;
   }
@@ -112,7 +129,7 @@ export class CaptureimageComponent implements OnInit {
   ngOnDestroy() {
     console.log("Is Stream Active? ", this.stream.active);
     if (this.stream.active) {
-      this.stream.getTracks().forEach(track => track.stop());
+      this.stream.getTracks().forEach((track) => track.stop());
       console.log(this.renderer.data);
       this.renderer.destroy();
       setTimeout(() => {
@@ -171,7 +188,7 @@ export class CaptureimageComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(function() {
+    setTimeout(function () {
       var elem = document.querySelector(".sidenav");
       var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();
