@@ -6,22 +6,23 @@ import {
   OnDestroy,
   ElementRef,
   Renderer2,
-  HostListener,
+  HostListener
 } from "@angular/core";
 import { Observable } from "rxjs";
 import {
   AngularFireStorage,
-  AngularFireUploadTask,
+  AngularFireUploadTask
 } from "@angular/fire/storage";
 import * as M from "materialize-css";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import "firebase/storage";
 import { finalize } from "rxjs/operators";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Component({
   selector: "app-captureimage",
   templateUrl: "./captureimage.component.html",
-  styleUrls: ["./captureimage.component.css"],
+  styleUrls: ["./captureimage.component.css"]
 })
 export class CaptureimageComponent implements OnInit {
   @ViewChild("video", { static: true }) videoElement: ElementRef;
@@ -41,26 +42,36 @@ export class CaptureimageComponent implements OnInit {
   task: AngularFireUploadTask;
   URL: Observable<String>;
   imageURL: String;
-
-  // @HostListener("window:resize", ["$event"])
-  // getScreenSize(event?) {
-  //   this.scrHeight = window.innerHeight;
-  //   this.scrWidth = window.innerWidth;
-  //   console.log(this.scrHeight, this.scrWidth);
-  // }
+  baseurl = "https://handwriting-recognition-api.herokuapp.com/api/v1";
+  prescription;
 
   constraints = {
     video: {
       facingMode: "environment",
       width: { ideal: 4096 },
-      height: { ideal: 2160 },
-    },
+      height: { ideal: 2160 }
+    }
   };
   constructor(
     private renderer: Renderer2,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private httpclient: HttpClient
   ) {
     this.capture_image = [];
+  }
+
+  sendurltoapi(url) {
+    let params = new HttpParams({
+      fromObject: {
+        imageURL: url
+      }
+    });
+    this.httpclient
+      .post(`${this.baseurl}/predict-medicine`, params)
+      .subscribe(data => {
+        this.prescription = data;
+        console.log(this.prescription);
+      });
   }
 
   upload(image) {
@@ -78,9 +89,10 @@ export class CaptureimageComponent implements OnInit {
           console.log("Image Uploaded");
 
           this.URL = ref.getDownloadURL();
-          this.URL.subscribe((res) => {
+          this.URL.subscribe(res => {
             this.imageURL = res;
             console.log("IMAGE URL", this.imageURL);
+            this.sendurltoapi(this.imageURL);
           });
         })
       )
@@ -99,7 +111,7 @@ export class CaptureimageComponent implements OnInit {
       stream
     );
 
-    this.renderer.listen(this.videoElement.nativeElement, "play", (event) => {
+    this.renderer.listen(this.videoElement.nativeElement, "play", event => {
       this.videoHeight = this.videoElement.nativeElement.videoHeight;
       this.videoWidth = this.videoElement.nativeElement.videoWidth;
     });
@@ -121,7 +133,7 @@ export class CaptureimageComponent implements OnInit {
     console.log(this.renderer.data);
     this.renderer.destroy();
     console.log("Is Stream Active? ", this.stream.active);
-    this.stream.getTracks().forEach((track) => track.stop());
+    this.stream.getTracks().forEach(track => track.stop());
     console.log(this.stream.active);
     this.stopcamera = false;
   }
@@ -129,7 +141,7 @@ export class CaptureimageComponent implements OnInit {
   ngOnDestroy() {
     console.log("Is Stream Active? ", this.stream.active);
     if (this.stream.active) {
-      this.stream.getTracks().forEach((track) => track.stop());
+      this.stream.getTracks().forEach(track => track.stop());
       console.log(this.renderer.data);
       this.renderer.destroy();
       setTimeout(() => {
@@ -188,7 +200,7 @@ export class CaptureimageComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(function () {
+    setTimeout(function() {
       var elem = document.querySelector(".sidenav");
       var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();

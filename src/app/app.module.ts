@@ -4,7 +4,7 @@ import { environment } from "./../environments/environment.prod";
 import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
+import { HttpClientModule } from "@angular/common/http";
 //Angular Fire Imports
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule, AngularFireAuth } from "@angular/fire/auth";
@@ -37,23 +37,23 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-
+    HttpClientModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
 
     StoreModule.forRoot({
-      auth: auth_reducer,
+      auth: auth_reducer
     }),
     AngularFireStorageModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production,
+      logOnly: environment.production
     }),
     EffectsModule.forRoot([AuthEffects]),
     AngularFireStorageModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [DoctorserviceService, PatientserviceService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
