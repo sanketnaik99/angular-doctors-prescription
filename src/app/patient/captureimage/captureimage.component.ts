@@ -9,10 +9,15 @@ import {
   HostListener
 } from "@angular/core";
 import { Observable } from "rxjs";
-import { AngularFireStorage } from "@angular/fire/storage";
+import {
+  AngularFireStorage,
+  AngularFireUploadTask
+} from "@angular/fire/storage";
 import * as M from "materialize-css";
 import { ImageCroppedEvent } from "ngx-image-cropper";
 import "firebase/storage";
+import { finalize } from "rxjs/operators";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Component({
   selector: "app-captureimage",
@@ -33,13 +38,12 @@ export class CaptureimageComponent implements OnInit {
   scrWidth: any;
   croppedImage: any = "";
   iscropping = true;
-
-  // @HostListener("window:resize", ["$event"])
-  // getScreenSize(event?) {
-  //   this.scrHeight = window.innerHeight;
-  //   this.scrWidth = window.innerWidth;
-  //   console.log(this.scrHeight, this.scrWidth);
-  // }
+  convert_image;
+  task: AngularFireUploadTask;
+  URL: Observable<String>;
+  imageURL: String;
+  baseurl = "https://handwriting-recognition-api.herokuapp.com/api/v1";
+  prescription;
 
   constraints = {
     video: {
@@ -50,23 +54,49 @@ export class CaptureimageComponent implements OnInit {
   };
   constructor(
     private renderer: Renderer2,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private httpclient: HttpClient
   ) {
     this.capture_image = [];
   }
 
-  upload(image) {
-    console.log(image);
-    let timestamp = Date.now().toString();
-    let ref = this.storage.ref(`captures/${timestamp}`);
-    ref
-      .put(image)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error("ERROR : ", err);
+  sendurltoapi(url) {
+    let params = new HttpParams({
+      fromObject: {
+        imageURL: url
+      }
+    });
+    this.httpclient
+      .post(`${this.baseurl}/predict-medicine`, params)
+      .subscribe(data => {
+        this.prescription = data;
+        console.log(this.prescription);
       });
+  }
+
+  upload(image) {
+    let timestamp = Date.now().toString();
+
+    const path = `captures/test`;
+    console.log("Starting upload");
+
+    let ref = this.storage.ref(path);
+    this.task = this.storage.upload(path, image);
+    this.task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          console.log("Image Uploaded");
+
+          this.URL = ref.getDownloadURL();
+          this.URL.subscribe(res => {
+            this.imageURL = res;
+            console.log("IMAGE URL", this.imageURL);
+            this.sendurltoapi(this.imageURL);
+          });
+        })
+      )
+      .subscribe();
   }
 
   ngOnInit() {
@@ -147,10 +177,12 @@ export class CaptureimageComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
+    const imageBlob = this.dataURItoBlob(this.croppedImage);
+    this.convert_image = new File([imageBlob], "image", { type: "image/jpeg" });
   }
 
   uploadonclick() {
-    this.upload(this.croppedImage);
+    this.upload(this.convert_image);
   }
 
   dataURItoBlob(dataURI) {
@@ -169,8 +201,8 @@ export class CaptureimageComponent implements OnInit {
 
   ngAfterViewInit(): void {
     setTimeout(function() {
-      // var elem = document.querySelector(".sidenav");
-      // var instance = M.Sidenav.init(elem);
+      var elem = document.querySelector(".sidenav");
+      var instance = M.Sidenav.init(elem);
       var instance = M.AutoInit();
     }, 0);
   }

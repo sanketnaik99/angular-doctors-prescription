@@ -1,0 +1,66 @@
+<mat-toolbar color="primary" class="navbar">
+  <span
+    [ngClass]="
+      this.mobileQuery.matches
+        ? 'navbar-header-mobile'
+        : 'navbar-header-desktop'
+    "
+  >
+    <button
+      mat-icon-button
+      color="primary"
+      *ngIf="this.mobileQuery.matches"
+      (click)="snav.toggle()"
+    >
+      <mat-icon class="hamburger-icon">menu</mat-icon>
+    </button>
+    <h1
+      *ngIf="this.title && !this.imagePath"
+      [ngClass]="
+        this.mobileQuery.matches
+          ? 'navbar-title-mobile'
+          : 'navbar-title-desktop'
+      "
+    >
+      {{ this.title }}
+    </h1>
+    <img
+      *ngIf="this.imagePath && !this.title"
+      [src]="this.imagePath"
+      [ngClass]="
+        this.mobileQuery.matches
+          ? 'navbar-image-mobile'
+          : 'navbar-image-desktop'
+      "
+    />
+  </span>
+  <span class="actions" *ngIf="!this.mobileQuery.matches">
+    <div *ngFor="let route of this.routes">
+      <button mat-button [routerLink]="route.path">
+        {{ route.name }}
+      </button>
+    </div>
+  </span>
+</mat-toolbar>
+
+<mat-sidenav-container
+  class="sidenav-container"
+  [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+>
+  <mat-sidenav
+    #snav
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [fixedInViewport]="mobileQuery.matches"
+    fixedTopGap="56"
+  >
+    <mat-nav-list>
+      <a
+        mat-list-item
+        [routerLink]="route.path"
+        (click)="snav.toggle()"
+        *ngFor="let route of this.routes"
+        >{{ route.name }}</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

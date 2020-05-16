@@ -3,10 +3,10 @@
     <a routerLink="/admin/dashboard" class="brand-logo"
       ><img src="assets/admin-logo.png" alt="Admin" height="60"
     /></a>
-    <a data-target="mobile-demo" class="sidenav-trigger"
+    <a class="sidenav-trigger" data-target="mobile" (click)="toggleNavbar()"
       ><i class="material-icons">menu</i></a
     >
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <ul class="right hide-on-med-and-down">
       <li>
         <a routerLink="/admin/dashboard" routerLinkActive="active">DASHBOARD</a>
       </li>
@@ -21,7 +21,7 @@
     </ul>
   </div>
 </nav>
-<ul class="sidenav" id="mobile-demo">
+<ul class="sidenav" materialize="sidenav" id="mobile" *ngIf="this.isNavbarOpen">
   <li>
     <a routerLink="/admin/dashboard" routerLinkActive="active">DASHBOARD</a>
   </li>

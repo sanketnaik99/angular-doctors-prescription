@@ -4,7 +4,7 @@ import { environment } from "./../environments/environment.prod";
 import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
+import { HttpClientModule } from "@angular/common/http";
 //Angular Fire Imports
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule, AngularFireAuth } from "@angular/fire/auth";
@@ -24,7 +24,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { ReactiveFormsModule } from "@angular/forms";
 import { DoctorserviceService } from "./doctor/doctorservice.service";
 import { PatientserviceService } from "./patient/patientservice.service";
-import { from } from "rxjs";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, RegistrationpageComponent],
@@ -34,11 +34,10 @@ import { from } from "rxjs";
     AppRoutingModule,
     RouterModule,
     FormsModule,
-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-
+    HttpClientModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
 
@@ -51,7 +50,8 @@ import { from } from "rxjs";
       logOnly: environment.production
     }),
     EffectsModule.forRoot([AuthEffects]),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule
   ],
   providers: [DoctorserviceService, PatientserviceService],
   bootstrap: [AppComponent]
