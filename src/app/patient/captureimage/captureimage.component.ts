@@ -60,15 +60,17 @@ export class CaptureimageComponent implements OnInit {
     this.capture_image = [];
   }
 
-  sendurltoapi(url) {
+  sendurltoapi() {
     let params = new HttpParams({
       fromObject: {
-        imageURL: url
+        imageURL:
+          "https://firebasestorage.googleapis.com/v0/b/doctor-s-prescription.appspot.com/o/captures%2Ftest?alt=media&token=6e804799-09b8-4b2a-adce-ae23c880c6d4"
       }
     });
     this.httpclient
       .post(`${this.baseurl}/predict-medicine`, params)
       .subscribe(data => {
+        console.log(data);
         this.prescription = data;
         console.log(this.prescription);
       });
@@ -92,7 +94,7 @@ export class CaptureimageComponent implements OnInit {
           this.URL.subscribe(res => {
             this.imageURL = res;
             console.log("IMAGE URL", this.imageURL);
-            this.sendurltoapi(this.imageURL);
+            this.sendurltoapi();
           });
         })
       )
