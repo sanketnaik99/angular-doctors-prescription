@@ -1,7 +1,7 @@
 import { finalize } from "rxjs/operators";
 import {
   AngularFireStorage,
-  AngularFireUploadTask
+  AngularFireUploadTask,
 } from "@angular/fire/storage";
 import { AdminService } from "./../admin.service";
 import { Component, OnInit } from "@angular/core";
@@ -13,7 +13,7 @@ const BASE_URL = "https://handwriting-recognition-api.herokuapp.com/api/v1";
 @Component({
   selector: "app-admin-medicines",
   templateUrl: "./admin-medicines.component.html",
-  styleUrls: ["./admin-medicines.component.css"]
+  styleUrls: ["./admin-medicines.component.css"],
 })
 export class AdminMedicinesComponent implements OnInit {
   isLoading: boolean = true;
@@ -34,17 +34,23 @@ export class AdminMedicinesComponent implements OnInit {
   ngOnInit() {
     this.adminService
       .getMedicineData()
-      .then(res => {
+      .then((res) => {
         this.medicines = res;
         this.isLoading = false;
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("ERROR", err);
       });
   }
 
   addImage(files) {
     this.image = files[0];
+  }
+
+  refreshIndex() {
+    this.http.get(`${BASE_URL}/update-index`).subscribe((res) => {
+      console.log(res);
+    });
   }
 
   uploadImage() {
@@ -63,23 +69,23 @@ export class AdminMedicinesComponent implements OnInit {
           console.log("FINALIZED");
 
           this.URL = ref.getDownloadURL();
-          this.URL.subscribe(res => {
+          this.URL.subscribe((res) => {
             this.downloadURL = res;
             console.log(this.downloadURL);
             const params = new HttpParams({
               fromObject: {
-                imageURL: this.downloadURL
-              }
+                imageURL: this.downloadURL,
+              },
             });
 
             const config = {
               headers: new HttpHeaders({
-                "Content-Type": "application/x-www-form-urlencoded"
-              })
+                "Content-Type": "application/x-www-form-urlencoded",
+              }),
             };
             this.http
               .post(`${BASE_URL}/predict-medicine`, params, config)
-              .subscribe(res => {
+              .subscribe((res) => {
                 this.result = res["prediction"];
                 this.predictionSuccess = res["result"];
                 console.log(res);
